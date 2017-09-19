@@ -51,6 +51,7 @@ public class ApplicationInitializer implements WebApplicationInitializer {
         servlet.addMapping("/product");
         servlet.addMapping("/distributor");
         servlet.addMapping("/sms");
+        servlet.addMapping("/location");
         
         servlet.setAsyncSupported(true);
         servlet.setLoadOnStartup(1);

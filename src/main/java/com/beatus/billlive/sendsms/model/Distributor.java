@@ -5,7 +5,7 @@ public class Distributor {
 	private String distributorName;
 	private String distributorPhone;
 	private String distributorLocation;
-	private String distributorDistrict;
+
 	public String getDistributorName() {
 		return distributorName;
 	}
@@ -23,11 +23,5 @@ public class Distributor {
 	}
 	public void setDistributorLocation(String distributorLocation) {
 		this.distributorLocation = distributorLocation;
-	}
-	public String getDistributorDistrict() {
-		return distributorDistrict;
-	}
-	public void setDistributorDistrict(String distributorDistrict) {
-		this.distributorDistrict = distributorDistrict;
 	}
 }

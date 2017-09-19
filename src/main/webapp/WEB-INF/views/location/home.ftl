@@ -6,12 +6,7 @@
 <div id="layout">
 <#include "menu.ftl">
     <div class="main" style="margin:30px; max-width:720px;">
-    <#include "get-distributors.ftl">
-    <#include "response.ftl">
+    <h1>Choose to Add/Get the locations</h1>
     </div>
-</div>
 </body>
-
-<script src="/billlive-sendsms/resources/js/tools.js" type="text/javascript"></script>
-
 </html>

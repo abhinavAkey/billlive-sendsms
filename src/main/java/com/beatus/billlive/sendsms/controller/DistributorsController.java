@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.beatus.billlive.sendsms.model.Distributor;
 import com.beatus.billlive.sendsms.model.DistributorResponse;
+import com.beatus.billlive.sendsms.model.Location;
 import com.beatus.billlive.sendsms.service.DistributorService;
+import com.beatus.billlive.sendsms.service.LocationService;
 import com.beatus.billlive.sendsms.utils.Constants;
 
 @Controller
@@ -25,6 +27,10 @@ public class DistributorsController {
 
 	@Resource(name = "distributorService")
     private DistributorService distributorService;
+	
+	@Resource(name = "locationService")
+    private LocationService locationService;
+	
 
     @RequestMapping(method = RequestMethod.GET)
     public String distributorHome(HttpServletRequest request, ModelMap model) {
@@ -34,7 +40,8 @@ public class DistributorsController {
     @RequestMapping(value = Constants.WEB_DISTRIBUTOR_ADD_DISTRIBUTOR,
             method = RequestMethod.GET)
     public String addDistributorGet(HttpServletRequest request, ModelMap model) {
-        //model.addAttribute("instance_info", itsService.getInstanceInfo());
+    	List<Location> locations = locationService.getLocations();
+        model.addAttribute("locations", locations);
         return "distributor/request-add";
     }
     

@@ -30,5 +30,12 @@ public class Constants {
 	public static final String DISTRIBUTOR_DISTRICT = "distributorDistrict";
 	public static final String PRODUCTS = "Products";
 	public static final String REDIRECT = "redirect:";
-
+	public static final String WEB_LOCATION_REQUEST = "/location";
+	public static final String WEB_LOCATION_ADD_LOCATION = "/addLocation";
+	public static final String WEB_LOCATION_GET_LOCATIONS = "/getLocations";
+	public static final String LOCATION = "location";
+	public static final String LOCATION_NAME = "locationName";
+	public static final String LOCATION_CITY = "locationCity";
+	public static final String LOCATION_DISTRICT = "locationDistrict";
+	public static final String LOCATION_STATE = "locationState";
 }

@@ -9,6 +9,9 @@
                 <a href="/billlive-sendsms/product" class="pure-menu-link">Products & Prices</a>
             </li>
             <li class="pure-menu-item">
+                <a href="/billlive-sendsms/location" class="pure-menu-link">Locations</a>
+            </li>
+            <li class="pure-menu-item">
                 <a href="/billlive-sendsms/distributor" class="pure-menu-link">Distributors</a>
             </li>
             <li class="pure-menu-item">

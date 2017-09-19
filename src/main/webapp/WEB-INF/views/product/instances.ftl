@@ -19,6 +19,6 @@
 </div>
 </body>
 
-<script src="../../../resources/js/tools.js" type="text/javascript"></script>
+<script src="/billlive-sendsms/resources/js/tools.js" type="text/javascript"></script>
 
 </html>

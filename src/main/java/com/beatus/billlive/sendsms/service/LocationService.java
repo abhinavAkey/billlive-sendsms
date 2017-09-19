@@ -24,23 +24,22 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import com.beatus.billlive.sendsms.model.Distributor;
-import com.beatus.billlive.sendsms.model.Distributor;
+import com.beatus.billlive.sendsms.model.Location;
 import com.beatus.billlive.sendsms.utils.Constants;
 
 @Service
-@Component("distributorService")
-public class DistributorService {
+@Component("locationService")
+public class LocationService {
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(DistributorService.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(LocationService.class);
 
 
-    public String addDistributor(Distributor distributor) {
+    public String addLocation(Location location) {
     	
-    	LOGGER.info("In addDistributor");
+    	LOGGER.info("In addLocation");
     	
     	ClassLoader classLoader = getClass().getClassLoader();
-    	File xmlFile = new File(classLoader.getResource("xml-datafiles/distributors.xml").getFile());
+    	File xmlFile = new File(classLoader.getResource("xml-datafiles/locations.xml").getFile());
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder;
         try {
@@ -53,22 +52,26 @@ public class DistributorService {
 
             
             // create the root element
-            Element distributorEle = doc.createElement(Constants.DISTRIBUTOR);
+            Element locationEle = doc.createElement(Constants.LOCATION);
 
             // create data elements and place them under root
-            Element e = doc.createElement(Constants.DISTRIBUTOR_NAME);
-            e.appendChild(doc.createTextNode(distributor.getDistributorName()));
-            distributorEle.appendChild(e);
+            Element e = doc.createElement(Constants.LOCATION_NAME);
+            e.appendChild(doc.createTextNode(location.getLocationName()));
+            locationEle.appendChild(e);
 
-            e = doc.createElement(Constants.DISTRIBUTOR_PHONE);
-            e.appendChild(doc.createTextNode(distributor.getDistributorPhone()));
-            distributorEle.appendChild(e);
+            e = doc.createElement(Constants.LOCATION_CITY);
+            e.appendChild(doc.createTextNode(location.getLocationCity()));
+            locationEle.appendChild(e);
 
-            e = doc.createElement(Constants.DISTRIBUTOR_LOCATION);
-            e.appendChild(doc.createTextNode(distributor.getDistributorLocation()));
-            distributorEle.appendChild(e);
+            e = doc.createElement(Constants.LOCATION_DISTRICT);
+            e.appendChild(doc.createTextNode(location.getLocationDistrict()));
+            locationEle.appendChild(e);
             
-            docEle.appendChild(distributorEle);
+            e = doc.createElement(Constants.LOCATION_STATE);
+            e.appendChild(doc.createTextNode(location.getLocationState()));
+            locationEle.appendChild(e);
+            
+            docEle.appendChild(locationEle);
 			LOGGER.info("doc " + doc);
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
@@ -83,17 +86,17 @@ public class DistributorService {
         }catch(Exception e){
         	return e.getMessage();
         }
-		return "distributor/request-get";
+		return "location/request-get";
     }
     
-    public List<Distributor> getDistributors() {
-		List<Distributor> distributors = new ArrayList<Distributor>();
+    public List<Location> getLocations() {
+		List<Location> locations = new ArrayList<Location>();
 		Document dom;
 		// Make an instance of the DocumentBuilderFactory
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		try {
 			ClassLoader classLoader = getClass().getClassLoader();
-			File xmlFile = new File(classLoader.getResource("xml-datafiles/distributors.xml").getFile());
+			File xmlFile = new File(classLoader.getResource("xml-datafiles/locations.xml").getFile());
 			// use the factory to take an instance of the document builder
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			// parse using the builder to get the DOM mapping of the
@@ -107,16 +110,19 @@ public class DistributorService {
 				for (int i = 0; i < length; i++) {
 					if (nl.item(i).getNodeType() == Node.ELEMENT_NODE) {
 						Element el = (Element) nl.item(i);
-						Distributor distributor = new Distributor();
-						if (el.getNodeName().contains(Constants.DISTRIBUTOR)) {
-							String name = el.getElementsByTagName(Constants.DISTRIBUTOR_NAME).item(0).getTextContent();
-							distributor.setDistributorName(name);
-							String phone = el.getElementsByTagName(Constants.DISTRIBUTOR_PHONE).item(0).getTextContent();
-							distributor.setDistributorPhone(phone);
-							String location = el.getElementsByTagName(Constants.DISTRIBUTOR_LOCATION).item(0).getTextContent();
-							distributor.setDistributorLocation(location);
+						Location location = new Location();
+						if (el.getNodeName().contains(Constants.LOCATION)) {
+							String name = el.getElementsByTagName(Constants.LOCATION_NAME).item(0).getTextContent();
+							location.setLocationName(name);
+							String city = el.getElementsByTagName(Constants.LOCATION_CITY).item(0).getTextContent();
+							location.setLocationCity(city);
+							String district = el.getElementsByTagName(Constants.LOCATION_DISTRICT).item(0).getTextContent();
+							location.setLocationDistrict(district);
+							String state = el.getElementsByTagName(Constants.LOCATION_STATE).item(0).getTextContent();
+							location.setLocationState(state);
+							
 						}
-						distributors.add(distributor);
+						locations.add(location);
 					}
 				}
 			}
@@ -127,10 +133,10 @@ public class DistributorService {
 		} catch (IOException ioe) {
 			LOGGER.info(ioe.getMessage());
 		}
-		return distributors;
+		return locations;
 	}
 
-    private static void addElement(Document doc, Distributor distributor) {
+    private static void addElement(Document doc, Location location) {
         NodeList employees = doc.getElementsByTagName("Employee");
         Element emp = null;
         

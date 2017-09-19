@@ -6,7 +6,7 @@
 <div id="layout">
 <#include "menu.ftl">
     <div class="main" style="margin:30px; max-width:720px;">
-    <#include "get-distributors.ftl">
+    <#include "add-location.ftl">
     <#include "response.ftl">
     </div>
 </div>

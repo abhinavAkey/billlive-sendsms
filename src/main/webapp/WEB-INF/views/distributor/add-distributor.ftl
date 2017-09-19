@@ -11,23 +11,18 @@
                 <span class="pure-form-message-inline">Required</span>
 
             </div>
-
+            
             <div class="pure-control-group">
                 <label for="distributorLocation">Distributor Location</label>
-                <input type="text" name="distributorLocation" id="distributorLocation" placeholder="Distributor Location"
-                       required>
-                <span class="pure-form-message-inline">Required</span>
-
+                <select id="distributorLocation" name="distributorLocation" required>
+                    <#list locations as location>
+                        <option value="${location.locationName}">${location.locationName}
+                        </option>
+                    </#list>
+                </select>
+                <span class="pure-form-message-inline">Required</span>              
             </div>
-            
-            <div class="pure-control-group">
-                <label for="distributorDistrict">Distributor District</label>
-                <input type="text" name="distributorDistrict" id="distributorDistrict" placeholder="Distributor District"
-                       required>
-                <span class="pure-form-message-inline">Required</span>
 
-            </div>
-            
              <div class="pure-control-group">
                 <label for="distributorPhone">Distributor Phone</label>
                 <input type="text" name="distributorPhone" id="distributorPhone" placeholder="Distributor Phone"
