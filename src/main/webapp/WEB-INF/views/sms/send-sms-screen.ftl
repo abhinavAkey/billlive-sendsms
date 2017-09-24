@@ -1,6 +1,6 @@
     <div class="its-request">
         <h1>Billlive Send SMS</h1><br><br>
-        
+<#if locsAndPrices>        
         <table class="table table-bordered" style="background-color: #92ca7a;">
             <thead id="bgcolor">
                 <tr>
@@ -29,6 +29,7 @@
 	                </#list>	           
 	            </tr>
             </#list>
-        </table>
+        </table>       
         <center><button type="submit" onclick="sendsms()" class="btn">Send SMS</button></center>
-    </div>
+</#if>     
+</div>
