@@ -16,7 +16,6 @@ import com.beatus.billlive.sendsms.model.Distributor;
 import com.beatus.billlive.sendsms.model.DistributorResponse;
 import com.beatus.billlive.sendsms.model.Location;
 import com.beatus.billlive.sendsms.service.DistributorService;
-import com.beatus.billlive.sendsms.service.LocationService;
 import com.beatus.billlive.sendsms.utils.Constants;
 
 @Controller
@@ -45,6 +44,13 @@ public class DistributorsController {
             method = RequestMethod.POST)
     public String addDistributorPost(HttpServletRequest request, Distributor distributor, ModelMap model) {
 		distributorService.addDistributor(distributor);
+    	return Constants.REDIRECT + "/distributor/getDistributors";
+    }
+    
+    @RequestMapping(value = Constants.WEB_DISTRIBUTOR_EDIT_DISTRIBUTOR,
+            method = RequestMethod.POST)
+    public String editDistributorPost(HttpServletRequest request, Distributor distributor, ModelMap model) {
+		distributorService.editDistributor(distributor);
     	return Constants.REDIRECT + "/distributor/getDistributors";
     }
     

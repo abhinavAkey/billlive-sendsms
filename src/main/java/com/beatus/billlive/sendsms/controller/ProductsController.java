@@ -46,6 +46,14 @@ public class ProductsController {
     	return Constants.REDIRECT + "/product/getProducts";
     }
     
+    @RequestMapping(value = Constants.WEB_PRODUCTS_EDIT_PRODUCT,
+            method = RequestMethod.POST)
+    public String editProductPost(HttpServletRequest request, Product product, ModelMap model) {
+    	LOGGER.info("In addProductPost");
+		productService.editProduct(product);
+    	return Constants.REDIRECT + "/product/getProducts";
+    }
+    
     @RequestMapping(value = Constants.WEB_PRODUCTS_ADD_PRODUCT_AND_LOCATION,
             method = RequestMethod.GET)
     public String addProductAndLocationsGet(HttpServletRequest request, ModelMap model) {
@@ -61,6 +69,14 @@ public class ProductsController {
     public String addProductAndLocationPost(HttpServletRequest request, Product product, ModelMap model) {
     	LOGGER.info("In addProductPost");
 		productService.addProductAndLocation(product);
+    	return Constants.REDIRECT + "/product/getProductsAndLocations";
+    }
+    
+    @RequestMapping(value = Constants.WEB_PRODUCTS_EDIT_PRODUCT_AND_LOCATION,
+            method = RequestMethod.POST)
+    public String editProductAndLocationPost(HttpServletRequest request, Product product, ModelMap model) {
+    	LOGGER.info("In addProductPost");
+		productService.editProductAndLocation(product);
     	return Constants.REDIRECT + "/product/getProductsAndLocations";
     }
     

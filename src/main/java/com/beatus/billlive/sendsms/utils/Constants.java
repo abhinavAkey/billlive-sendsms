@@ -42,4 +42,8 @@ public class Constants {
 	public static final String WEB_PRODUCTS_ADD_PRODUCT_AND_LOCATION = "/addProductAndLocation";
 	public static final String WEB_PRODUCTS_GET_PRODUCTS_AND_LOCATIONS = "/getProductsAndLocations";
 	public static final String PRODUCT_LOCATION_NAME = "productandlocation";
+	public static final String WEB_LOCATION_EDIT_LOCATION = "/editLocation";
+	public static final String WEB_PRODUCTS_EDIT_PRODUCT = "/editProduct";
+	public static final String WEB_PRODUCTS_EDIT_PRODUCT_AND_LOCATION = "/editProductsAndLocations";
+	public static final String WEB_DISTRIBUTOR_EDIT_DISTRIBUTOR = "editDistributor";
 }
