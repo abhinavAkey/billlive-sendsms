@@ -6,16 +6,31 @@
         <a class="pure-menu-heading" href="/">Billlive Send SMS</a>
         <ul class="pure-menu-list">
             <li class="pure-menu-item">
-                <a href="/billlive-sendsms/product" class="pure-menu-link">Products & Prices</a>
+                <a href="/billlive-sendsms/location/addLocation" class="pure-menu-link">Add Locations</a>
             </li>
             <li class="pure-menu-item">
-                <a href="/billlive-sendsms/location" class="pure-menu-link">Locations</a>
+                <a href="/billlive-sendsms/location/getLocations" class="pure-menu-link">Edit/Get Locations</a>
             </li>
             <li class="pure-menu-item">
-                <a href="/billlive-sendsms/distributor" class="pure-menu-link">Distributors</a>
+                <a href="/billlive-sendsms/product/addProduct" class="pure-menu-link">Add Product</a>
             </li>
             <li class="pure-menu-item">
-                <a href="/billlive-sendsms/sms" class="pure-menu-link">Send SMS</a>
+                <a href="/billlive-sendsms/product/getProducts" class="pure-menu-link">Edit/Get Products</a>
+            </li>
+            <li class="pure-menu-item">
+                <a href="/billlive-sendsms/product/addProductAndLocation" class="pure-menu-link">Add Products With Locations</a>
+            </li>
+            <li class="pure-menu-item">
+                <a href="/billlive-sendsms/product/getProductsAndLocations" class="pure-menu-link">Edit/Get Products with Locations</a>
+            </li>
+            <li class="pure-menu-item">
+                <a href="/billlive-sendsms/distributor/addDistributor" class="pure-menu-link">Add Distributors</a>
+            </li>
+            <li class="pure-menu-item">
+                <a href="/billlive-sendsms/distributor/getDistributors" class="pure-menu-link">Edit/Get Distributors</a>
+            </li>
+            <li class="pure-menu-item">
+                <a href="/billlive-sendsms/sms/sendsmsScreen" class="pure-menu-link">Send SMS</a>
             </li>
         </ul>
     </div>

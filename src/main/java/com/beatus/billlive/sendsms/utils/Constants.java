@@ -38,4 +38,8 @@ public class Constants {
 	public static final String LOCATION_CITY = "locationCity";
 	public static final String LOCATION_DISTRICT = "locationDistrict";
 	public static final String LOCATION_STATE = "locationState";
+	public static final String PRODUCT_LOCATION = "productLocation";
+	public static final String WEB_PRODUCTS_ADD_PRODUCT_AND_LOCATION = "/addProductAndLocation";
+	public static final String WEB_PRODUCTS_GET_PRODUCTS_AND_LOCATIONS = "/getProductsAndLocations";
+	public static final String PRODUCT_LOCATION_NAME = "productandlocation";
 }

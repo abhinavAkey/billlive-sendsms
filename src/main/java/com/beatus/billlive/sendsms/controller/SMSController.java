@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.beatus.billlive.sendsms.model.ProductWithLocationsAndPricesRequest;
 import com.beatus.billlive.sendsms.service.SMSService;
 import com.beatus.billlive.sendsms.utils.Constants;
 
@@ -17,7 +18,7 @@ import com.beatus.billlive.sendsms.utils.Constants;
 @RequestMapping(Constants.WEB_SMS_REQUEST)
 public class SMSController {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ProductsController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(SMSController.class);
 
 	@Resource(name = "smsService")
     private SMSService smsService;
@@ -29,8 +30,16 @@ public class SMSController {
     
     @RequestMapping(value = Constants.WEB_SMS_SEND_SMS_SCREEN,
             method = RequestMethod.GET)
-    public String getProductsGet(HttpServletRequest request, ModelMap model) {
-        //model.addAttribute("instance_info", itsService.getInstanceInfo());
+    public String getSMSScreen(HttpServletRequest request, ModelMap model) {
+    	smsService.getSMSScreen(request, model);
         return "sms/request";
+    }
+    
+    @RequestMapping(value = Constants.WEB_SMS_SEND_SMS_SCREEN,
+            method = RequestMethod.POST)
+    public String getSMSScreenPOST(HttpServletRequest request, ProductWithLocationsAndPricesRequest productNameLocAndPrice, ModelMap model) {
+    	LOGGER.info("productNameLocAndPrice" + productNameLocAndPrice.getProductNameLocAndPrice());
+    	smsService.postSMSScreen(request, productNameLocAndPrice, model);
+        return Constants.REDIRECT + "/sms/sendsmsScreen";
     }
 }

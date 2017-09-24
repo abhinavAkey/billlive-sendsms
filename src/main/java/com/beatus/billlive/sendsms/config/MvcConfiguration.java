@@ -8,14 +8,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.accept.ContentNegotiationManager;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
@@ -32,6 +29,8 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 public class MvcConfiguration extends WebMvcConfigurerAdapter {
 
 	private final static String REAL_CSS_PATH = "/resources/css/";
+	
+	private final static String REAL_IMG_PATH = "/resources/img/";
 
     private final static String REAL_JS_PATH = "/resources/js/";
 
@@ -41,6 +40,9 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 
     @Value("/resources/css/*")
     private String versionedCssPath;
+    
+    @Value("/resources/img/*")
+    private String versionedImgPath;
 
     @Value("/resources/js/*")
     private String versionedJsPath;
@@ -87,6 +89,9 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         registry.addResourceHandler(versionedCssPath).addResourceLocations(REAL_CSS_PATH)
             .setCachePeriod(Integer.MAX_VALUE);
+        
+        registry.addResourceHandler(versionedImgPath).addResourceLocations(REAL_IMG_PATH)
+        .setCachePeriod(Integer.MAX_VALUE);
 
         registry.addResourceHandler(versionedJsPath).addResourceLocations(REAL_JS_PATH)
             .setCachePeriod(Integer.MAX_VALUE);

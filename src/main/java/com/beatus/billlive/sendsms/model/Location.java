@@ -1,6 +1,6 @@
 package com.beatus.billlive.sendsms.model;
 
-public class Location {
+public class Location implements Comparable<Location>{
 
 	private String locationName;
 	private String locationCity;
@@ -30,5 +30,10 @@ public class Location {
 	}
 	public void setLocationState(String locationState) {
 		this.locationState = locationState;
+	}
+	
+	@Override
+	public int compareTo(Location compare) {
+		return this.locationName.compareTo(compare.locationName);
 	}
 }

@@ -11,14 +11,6 @@
                 <span class="pure-form-message-inline">Required</span>
 
             </div>
-
-            <div class="pure-control-group">
-                <label for="productPrice">Product Price</label>
-                <input type="text" name="productPrice" id="productPrice" placeholder="Product Price"
-                       required>
-                <span class="pure-form-message-inline">Required</span>
-
-            </div>
             
             <div class="pure-control-group">
                 <label for="productCategory">Product Category</label>

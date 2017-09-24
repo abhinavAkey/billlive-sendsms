@@ -28,10 +28,6 @@ public class DistributorsController {
 	@Resource(name = "distributorService")
     private DistributorService distributorService;
 	
-	@Resource(name = "locationService")
-    private LocationService locationService;
-	
-
     @RequestMapping(method = RequestMethod.GET)
     public String distributorHome(HttpServletRequest request, ModelMap model) {
         return "distributor/home";
@@ -40,7 +36,7 @@ public class DistributorsController {
     @RequestMapping(value = Constants.WEB_DISTRIBUTOR_ADD_DISTRIBUTOR,
             method = RequestMethod.GET)
     public String addDistributorGet(HttpServletRequest request, ModelMap model) {
-    	List<Location> locations = locationService.getLocations();
+    	List<Location> locations = distributorService.getLocations();
         model.addAttribute("locations", locations);
         return "distributor/request-add";
     }
