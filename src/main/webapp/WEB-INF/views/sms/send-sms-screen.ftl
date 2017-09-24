@@ -1,6 +1,6 @@
     <div class="its-request">
         <h1>Billlive Send SMS</h1><br><br>
-<#if locsAndPrices>        
+<#if locsAndPrices?has_content>        
         <table class="table table-bordered" style="background-color: #92ca7a;">
             <thead id="bgcolor">
                 <tr>
@@ -13,7 +13,7 @@
             </thead>
             <#list locsAndPrices as locAndPrice>
 	            <tr>
-	                <td id="bgcolor"><input type="checkbox" id="${locAndPrice.locationName}" name="${locAndPrice.locationName}" value=""></td>
+	                <td id="bgcolor"><input type="checkbox" id="${locAndPrice.locationName}" name="checkbox-location" value="" checked></td>
 	                <td id="bgcolor"><strong>${locAndPrice.locationName}</strong></td>
 	                  <#list products as product>
 	                   	<#assign isAdded = 'false'>

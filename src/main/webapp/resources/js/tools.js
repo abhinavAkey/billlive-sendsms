@@ -69,12 +69,28 @@ function changeValues(id) {
 function sendsms() {
 	var inp = document.getElementsByTagName('input');
 	var names = [];
+	var checkboxes = document.getElementsByName('checkbox-location');
+	  var checkboxesChecked = [];
+	  // loop over them all
+	  for (var i=0; i<checkboxes.length; i++) {
+	     // And stick the checked ones onto an array...
+	     if (checkboxes[i].checked) {
+	        checkboxesChecked[i] = checkboxes[i].id;
+	     }
+	  }
+	  console.log(checkboxesChecked)
 	for ( var i in inp) {
 		if (inp[i].type == "text") {
 			inp[i].focus();
 			// alert(inp[i].value);
 			if (inp[i].name) {
-				names[i] = inp[i].name + '##' + inp[i].value;
+				for ( var j in checkboxesChecked){
+					if(checkboxesChecked[j] && inp[i].name.includes(checkboxesChecked[j])){
+						console.log(checkboxesChecked[j]);
+						names[i] = inp[i].name + '##' + inp[i].value;
+						console.log(names[i]);
+					}
+				}
 			}
 		}
 	}
