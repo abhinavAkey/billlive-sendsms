@@ -1,9 +1,13 @@
 package com.beatus.billlive.sendsms.model;
 
+import java.io.File;
+import java.util.Arrays;
+
 public class Product implements Comparable<Product>{
 
 	private String productName;
 	private String productPrice;
+	private byte[] productImage;
 	private String productCategory;
 	private String productLocation;
 	public String getProductName() {
@@ -34,4 +38,19 @@ public class Product implements Comparable<Product>{
 	public int compareTo(Product compare) {
 		return this.productName.compareTo(compare.productName);
 	}
+		
+	public byte[] getProductImage() {
+		return productImage;
+	}
+	public void setProductImage(byte[] productImage) {
+		this.productImage = productImage;
+	}
+	@Override
+	public String toString() {
+		return "Product [productName=" + productName + ", productPrice=" + productPrice + ", productImage="
+				+ productImage + ", productCategory=" + productCategory + ", productLocation="
+				+ productLocation + "]";
+	}
+	
+	
 }

@@ -43,6 +43,7 @@ public class ProductsController {
     public String addProductPost(HttpServletRequest request, Product product, ModelMap model) {
     	LOGGER.info("In addProductPost");
 		productService.addProduct(product);
+		LOGGER.info("product======="+product.toString());
     	return Constants.REDIRECT + "/product/getProducts";
     }
     
