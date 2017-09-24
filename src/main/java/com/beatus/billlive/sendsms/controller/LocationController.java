@@ -45,6 +45,13 @@ public class LocationController {
     	return Constants.REDIRECT + "/location/getLocations";
     }
     
+    @RequestMapping(value = Constants.WEB_LOCATION_EDIT_LOCATION,
+            method = RequestMethod.POST)
+    public String editLocationPost(HttpServletRequest request, Location location, ModelMap model) {
+		locationService.editLocation(location);
+    	return Constants.REDIRECT + "/location/getLocations";
+    }
+    
     @RequestMapping(value = Constants.WEB_LOCATION_GET_LOCATIONS,
             method = RequestMethod.GET)
     public String getLocationsGet(HttpServletRequest request, ModelMap model) {
