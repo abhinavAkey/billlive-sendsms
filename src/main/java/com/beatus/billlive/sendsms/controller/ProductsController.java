@@ -1,5 +1,6 @@
 package com.beatus.billlive.sendsms.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -40,7 +41,7 @@ public class ProductsController {
     
     @RequestMapping(value = Constants.WEB_PRODUCTS_ADD_PRODUCT,
             method = RequestMethod.POST)
-    public String addProductPost(HttpServletRequest request, Product product, ModelMap model) {
+    public String addProductPost(HttpServletRequest request, Product product, ModelMap model) throws ClassNotFoundException, SQLException {
     	LOGGER.info("In addProductPost");
 		productService.addProduct(product);
 		LOGGER.info("product======="+product.toString());
@@ -57,7 +58,7 @@ public class ProductsController {
     
     @RequestMapping(value = Constants.WEB_PRODUCTS_ADD_PRODUCT_AND_LOCATION,
             method = RequestMethod.GET)
-    public String addProductAndLocationsGet(HttpServletRequest request, ModelMap model) {
+    public String addProductAndLocationsGet(HttpServletRequest request, ModelMap model) throws ClassNotFoundException, SQLException {
     	List<Product> products = productService.getProducts();
     	model.addAttribute("products", products);
     	List<Location> locations = productService.getLocations();
@@ -67,7 +68,7 @@ public class ProductsController {
     
     @RequestMapping(value = Constants.WEB_PRODUCTS_ADD_PRODUCT_AND_LOCATION,
             method = RequestMethod.POST)
-    public String addProductAndLocationPost(HttpServletRequest request, Product product, ModelMap model) {
+    public String addProductAndLocationPost(HttpServletRequest request, Product product, ModelMap model) throws ClassNotFoundException, SQLException {
     	LOGGER.info("In addProductPost");
 		productService.addProductAndLocation(product);
     	return Constants.REDIRECT + "/product/getProductsAndLocations";
@@ -83,7 +84,7 @@ public class ProductsController {
     
     @RequestMapping(value = Constants.WEB_PRODUCTS_GET_PRODUCTS,
             method = RequestMethod.GET)
-    public String getProductsGet(HttpServletRequest request, ModelMap model) {
+    public String getProductsGet(HttpServletRequest request, ModelMap model) throws ClassNotFoundException, SQLException {
     	List<Product> products = productService.getProducts();
     	LOGGER.info("After the get call and the products are "  + products != null? products.size() > 0 ? products.get(0).getProductName() : "No Product data" : "No Product data");
     	ProductsResponse resp = new ProductsResponse();
@@ -95,7 +96,7 @@ public class ProductsController {
     
     @RequestMapping(value = Constants.WEB_PRODUCTS_GET_PRODUCTS_AND_LOCATIONS,
             method = RequestMethod.GET)
-    public String getProductsAndLocationsGet(HttpServletRequest request, ModelMap model) {
+    public String getProductsAndLocationsGet(HttpServletRequest request, ModelMap model) throws ClassNotFoundException, SQLException {
     	List<Product> products = productService.getProductsAndLocations();
     	LOGGER.info("After the get call and the products are "  + products != null? products.size() > 0 ? products.get(0).getProductName() : "No Product data" : "No Product data");
     	ProductsResponse resp = new ProductsResponse();

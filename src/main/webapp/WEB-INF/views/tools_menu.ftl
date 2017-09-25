@@ -30,6 +30,12 @@
                 <a href="/billlive-sendsms/distributor/getDistributors" class="pure-menu-link">Edit/Get Distributors</a>
             </li>
             <li class="pure-menu-item">
+                <a href="/billlive-sendsms/sms/addSmsConfiguration" class="pure-menu-link">Add SMS Configuration</a>
+            </li>
+            <li class="pure-menu-item">
+                <a href="/billlive-sendsms/sms/getSmsConfiguration" class="pure-menu-link">Edit/Get SMS Configuration</a>
+            </li>
+            <li class="pure-menu-item">
                 <a href="/billlive-sendsms/sms/sendsmsScreen" class="pure-menu-link">Send SMS</a>
             </li>
         </ul>

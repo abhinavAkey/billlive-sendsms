@@ -1,5 +1,6 @@
 package com.beatus.billlive.sendsms.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -34,7 +35,7 @@ public class DistributorsController {
     
     @RequestMapping(value = Constants.WEB_DISTRIBUTOR_ADD_DISTRIBUTOR,
             method = RequestMethod.GET)
-    public String addDistributorGet(HttpServletRequest request, ModelMap model) {
+    public String addDistributorGet(HttpServletRequest request, ModelMap model) throws ClassNotFoundException, SQLException {
     	List<Location> locations = distributorService.getLocations();
         model.addAttribute("locations", locations);
         return "distributor/request-add";
@@ -42,7 +43,7 @@ public class DistributorsController {
     
     @RequestMapping(value = Constants.WEB_DISTRIBUTOR_ADD_DISTRIBUTOR,
             method = RequestMethod.POST)
-    public String addDistributorPost(HttpServletRequest request, Distributor distributor, ModelMap model) {
+    public String addDistributorPost(HttpServletRequest request, Distributor distributor, ModelMap model) throws ClassNotFoundException, SQLException {
 		distributorService.addDistributor(distributor);
     	return Constants.REDIRECT + "/distributor/getDistributors";
     }
@@ -56,7 +57,7 @@ public class DistributorsController {
     
     @RequestMapping(value = Constants.WEB_DISTRIBUTOR_GET_DISTRIBUTORS,
             method = RequestMethod.GET)
-    public String getDistributorsGet(HttpServletRequest request, ModelMap model) {
+    public String getDistributorsGet(HttpServletRequest request, ModelMap model) throws ClassNotFoundException, SQLException {
     	List<Distributor> distributors = distributorService.getDistributors();
     	LOGGER.info("After the get call and the distributors are "  + distributors != null? distributors.size() > 0 ? distributors.get(0).getDistributorName() : "No Distributor data" : "No Distributor data");
         DistributorResponse resp = new DistributorResponse();

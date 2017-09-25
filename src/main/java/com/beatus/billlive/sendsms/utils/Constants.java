@@ -46,4 +46,6 @@ public class Constants {
 	public static final String WEB_PRODUCTS_EDIT_PRODUCT = "/editProduct";
 	public static final String WEB_PRODUCTS_EDIT_PRODUCT_AND_LOCATION = "/editProductsAndLocations";
 	public static final String WEB_DISTRIBUTOR_EDIT_DISTRIBUTOR = "editDistributor";
+	public static final String WEB_SMS_SEND_SMS_ADD_SCREEN_CONFIGURATION = "/addSmsConfiguration";
+	public static final String WEB_SMS_SCREEN_GET_CONFIGURATION = "/getSmsConfiguration";
 }

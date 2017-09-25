@@ -14,9 +14,9 @@
             
             <div class="pure-control-group">
                 <label for="distributorLocation">Distributor Location</label>
-                <select id="distributorLocation" name="distributorLocation" required>
+                <select id="locationId" name="locationId" required>
                     <#list locations as location>
-                        <option value="${location.locationName}">${location.locationName}
+                        <option value="${location.locationId}">${location.locationName}
                         </option>
                     </#list>
                 </select>

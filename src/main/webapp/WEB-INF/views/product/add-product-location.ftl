@@ -8,7 +8,7 @@
                 <label for="productName">Product Name</label>
                 <select id="productName" name="productName" required>
                     <#list products as product>
-                        <option value="${product.productName}">${product.productName}
+                        <option value="${product.productId}">${product.productName}
                         </option>
                     </#list>
                 </select>

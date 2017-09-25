@@ -2,11 +2,18 @@ package com.beatus.billlive.sendsms.model;
 
 public class Location implements Comparable<Location>{
 
+	private int locationId;
 	private String locationName;
 	private String locationCity;
 	private String locationDistrict;
 	private String locationState;
 	
+	public int getLocationId() {
+		return locationId;
+	}
+	public void setLocationId(int locationId) {
+		this.locationId = locationId;
+	}
 	public String getLocationName() {
 		return locationName;
 	}

@@ -21,7 +21,6 @@
 		                    <td><input type="text" onchange="changeProduct(this.id)" class="form-control" id="product-${product.productName}" name="${product.productCategory}" value="${product.productCategory}"></td>
 		                    <td><button type="submit" onclick="editProduct(this.id)" id="product-${product.productName}" class="btn"><span class="glyphicon glyphicon-edit"></span></button>&nbsp&nbsp&nbsp<button type="submit" onclick="deleteProduct(this.id)" id="product-${product.productName}" class="btn"><span class="glyphicon glyphicon-remove"></span></button></td>
 	                 	</tr>
-	                 
 	                 </#list>	           
         </table>
 </#if>  
