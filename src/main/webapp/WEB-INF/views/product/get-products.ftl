@@ -10,7 +10,7 @@
             </thead>
 	            <tr>
 	                 <#list products as product>
-	                    <th><input type="text" onchange="changeProduct(this.id)" class="form-control" id="product-${product.productName}" name="${product.productName}" value="${product.productName}"></th>
+	                    <th><input type="text" onchange="changeProduct(this.id)" class="form-control" id="product-${product.productName}" name="${product.productId}" value="${product.productName}"></th>
 	                    <th><input type="text" onchange="changeProduct(this.id)" class="form-control" id="product-${product.productName}" name="${product.productCategory}" value="${product.productCategory}"></th>
 	                    <th><button type="submit" onclick="editProduct(this.id)" id="product-${product.productName}" class="btn">Edit Product</button>&nbsp&nbsp&nbsp<button type="submit" onclick="deleteProduct(this.id)" id="product-${product.productName}" class="btn">Delete Product</button></th>
 	                 </#list>	           
