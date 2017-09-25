@@ -1,8 +1,10 @@
     <div class="its-request">
         <h1>Billlive Send SMS</h1><br><br>
+        <div class="container">
+    <div class="row col-md-12">
 <#if locsAndPrices?has_content>        
-        <table class="table table-bordered" style="background-color: #92ca7a;">
-            <thead id="bgcolor">
+        <table class="table table-striped" style="background-color: white;">
+            <thead>
                 <tr>
                     <th>Check</th>
                     <th></th>
@@ -13,8 +15,8 @@
             </thead>
             <#list locsAndPrices as locAndPrice>
 	            <tr>
-	                <td id="bgcolor"><input type="checkbox" id="${locAndPrice.locationName}" name="checkbox-location" value="" checked></td>
-	                <td id="bgcolor"><strong>${locAndPrice.locationName}</strong></td>
+	                <td><input type="checkbox" id="${locAndPrice.locationName}" name="checkbox-location" value="" checked></td>
+	                <td><strong>${locAndPrice.locationName}</strong></td>
 	                  <#list products as product>
 	                   	<#assign isAdded = 'false'>
 	                    <#list locAndPrice.productAndPrices as productAndPrice>	                     	                     
@@ -33,3 +35,8 @@
         <center><button type="submit" onclick="sendsms()" class="btn">Send SMS</button></center>
 </#if>     
 </div>
+</div>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
