@@ -1,5 +1,7 @@
 package com.beatus.billlive.sendsms.service;
 
+
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,12 +18,15 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
+import com.beatus.billlive.sendsms.http.HttpApiCall;
+import com.beatus.billlive.sendsms.http.UrlBuilder;
 import com.beatus.billlive.sendsms.model.Distributor;
 import com.beatus.billlive.sendsms.model.Location;
 import com.beatus.billlive.sendsms.model.LocationAndPrice;
 import com.beatus.billlive.sendsms.model.Product;
 import com.beatus.billlive.sendsms.model.ProductAndPrice;
 import com.beatus.billlive.sendsms.model.ProductWithLocationsAndPricesRequest;
+import com.beatus.billlive.sendsms.model.SMSConfiguration;
 
 @Service
 @Component("smsService")
@@ -96,19 +101,21 @@ public class SMSService {
 				for (Distributor distributor : distributors) {
 					if (distributor != null && productsUpdated.containsKey(distributor.getLocationId())) {
 						List<ProductAndPrice> products = productsUpdated.get(distributor.getLocationId());
-						String productsInfo = "A Message from So And So \n";
+						SMSConfiguration config = getSMSScreenConfiguration(model);
+						String productsInfo = config.getMessageHeader();
 						for (ProductAndPrice product : products) {
 							if (product != null) {
 								productsInfo += "The product " + product.getProductName() + " price changed to "
 										+ product.getPrice() + "\n";
 							}
 						}
+						productsInfo = productsInfo + "\n "+ config.getMessageFooter();
 						LOGGER.info(productsInfo);
-						/*UrlBuilder urlBuilder = new UrlBuilder("");
+						UrlBuilder urlBuilder = new UrlBuilder(config.getSmsUrl());
 						Map<String, Object> requestParameters = new HashMap<>();
-						requestParameters.put("uname", "");
-						requestParameters.put("pass", "");
-						requestParameters.put("send", "");
+						requestParameters.put("uname", config.getParameterUsername());
+						requestParameters.put("pass", config.getParameterPassword());
+						requestParameters.put("send", config.getSendCode());
 						requestParameters.put("dest", distributor.getDistributorPhone());
 						requestParameters.put("msg", productsInfo);
 
@@ -122,11 +129,21 @@ public class SMSService {
 							LOGGER.debug("responded with [{}]", response);
 						} catch (IOException ioe) {
 							LOGGER.error(ioe.toString());
-						}*/
+						}
 					}
 				}
 			}
 		}
+	}
+
+	public void addSMSScreenConfiguration(HttpServletRequest request, SMSConfiguration smsConfiguration,
+			ModelMap model) {
+				
+	}
+
+	public SMSConfiguration getSMSScreenConfiguration(ModelMap model) {
+		model.addAttribute("configuration", null);
+		return null;
 	}
 
 }
