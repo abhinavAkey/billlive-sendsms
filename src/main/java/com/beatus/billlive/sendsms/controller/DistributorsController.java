@@ -44,15 +44,15 @@ public class DistributorsController {
     @RequestMapping(value = Constants.WEB_DISTRIBUTOR_ADD_DISTRIBUTOR,
             method = RequestMethod.POST)
     public String addDistributorPost(HttpServletRequest request, Distributor distributor, ModelMap model) throws ClassNotFoundException, SQLException {
-		distributorService.addDistributor(distributor);
-    	return Constants.REDIRECT + "/distributor/getDistributors";
+		String resp = distributorService.addDistributor(distributor);
+    	return resp;
     }
     
     @RequestMapping(value = Constants.WEB_DISTRIBUTOR_EDIT_DISTRIBUTOR,
             method = RequestMethod.POST)
-    public String editDistributorPost(HttpServletRequest request, Distributor distributor, ModelMap model) {
-		distributorService.editDistributor(distributor);
-    	return Constants.REDIRECT + "/distributor/getDistributors";
+    public String editDistributorPost(HttpServletRequest request, Distributor distributor, ModelMap model) throws ClassNotFoundException, SQLException {
+		String resp = distributorService.editDistributor(distributor);
+    	return resp;
     }
     
     @RequestMapping(value = Constants.WEB_DISTRIBUTOR_GET_DISTRIBUTORS,

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.beatus.billlive.sendsms.model.Location;
 import com.beatus.billlive.sendsms.model.Product;
+import com.beatus.billlive.sendsms.model.ProductsAndLocations;
+import com.beatus.billlive.sendsms.model.ProductsAndLocationsResponse;
 import com.beatus.billlive.sendsms.model.ProductsResponse;
 import com.beatus.billlive.sendsms.service.ProductService;
 import com.beatus.billlive.sendsms.utils.Constants;
@@ -43,17 +45,17 @@ public class ProductsController {
             method = RequestMethod.POST)
     public String addProductPost(HttpServletRequest request, Product product, ModelMap model) throws ClassNotFoundException, SQLException {
     	LOGGER.info("In addProductPost");
-		productService.addProduct(product);
+    	String resp = productService.addProduct(product);
 		LOGGER.info("product======="+product.toString());
-    	return Constants.REDIRECT + "/product/getProducts";
+    	return resp;
     }
     
     @RequestMapping(value = Constants.WEB_PRODUCTS_EDIT_PRODUCT,
             method = RequestMethod.POST)
-    public String editProductPost(HttpServletRequest request, Product product, ModelMap model) {
+    public String editProductPost(HttpServletRequest request, Product product, ModelMap model) throws SQLException {
     	LOGGER.info("In addProductPost");
-		productService.editProduct(product);
-    	return Constants.REDIRECT + "/product/getProducts";
+		String resp = productService.editProduct(product);
+    	return resp;
     }
     
     @RequestMapping(value = Constants.WEB_PRODUCTS_ADD_PRODUCT_AND_LOCATION,
@@ -68,18 +70,18 @@ public class ProductsController {
     
     @RequestMapping(value = Constants.WEB_PRODUCTS_ADD_PRODUCT_AND_LOCATION,
             method = RequestMethod.POST)
-    public String addProductAndLocationPost(HttpServletRequest request, Product product, ModelMap model) throws ClassNotFoundException, SQLException {
+    public String addProductAndLocationPost(HttpServletRequest request, ProductsAndLocations product, ModelMap model) throws ClassNotFoundException, SQLException {
     	LOGGER.info("In addProductPost");
-		productService.addProductAndLocation(product);
-    	return Constants.REDIRECT + "/product/getProductsAndLocations";
+		String resp = productService.addProductAndLocation(product);
+    	return resp;
     }
     
     @RequestMapping(value = Constants.WEB_PRODUCTS_EDIT_PRODUCT_AND_LOCATION,
             method = RequestMethod.POST)
-    public String editProductAndLocationPost(HttpServletRequest request, Product product, ModelMap model) {
+    public String editProductAndLocationPost(HttpServletRequest request, ProductsAndLocations product, ModelMap model) throws SQLException {
     	LOGGER.info("In addProductPost");
-		productService.editProductAndLocation(product);
-    	return Constants.REDIRECT + "/product/getProductsAndLocations";
+		String resp = productService.editProductAndLocation(product);
+    	return resp;
     }
     
     @RequestMapping(value = Constants.WEB_PRODUCTS_GET_PRODUCTS,
@@ -97,10 +99,10 @@ public class ProductsController {
     @RequestMapping(value = Constants.WEB_PRODUCTS_GET_PRODUCTS_AND_LOCATIONS,
             method = RequestMethod.GET)
     public String getProductsAndLocationsGet(HttpServletRequest request, ModelMap model) throws ClassNotFoundException, SQLException {
-    	List<Product> products = productService.getProductsAndLocations();
+    	List<ProductsAndLocations> products = productService.getProductsAndLocations();
     	LOGGER.info("After the get call and the products are "  + products != null? products.size() > 0 ? products.get(0).getProductName() : "No Product data" : "No Product data");
-    	ProductsResponse resp = new ProductsResponse();
-        resp.setProducts(products);
+    	ProductsAndLocationsResponse resp = new ProductsAndLocationsResponse();
+        resp.setProductsAndLocations(products);
     	model.addAttribute("productsResp", resp); 
     	model.addAttribute("products", products); 
     	return "product/request-products-locations-get";

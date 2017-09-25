@@ -21,12 +21,11 @@
                         </tr>
             </thead>
 	                 <#list products as product>
-	                 	<tr>
-	                 
+	                 	<tr>             
 		                    <td class="edit">${product.productName}</td>
-		                    <td>  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAwBAMAAACh2TSJAAAALVBMVEUAAADtNTX////3n5/+9fX719f7zMz5tLTzfHzuQED//f31jY3ybGzxXV3wVFRaxp+rAAAAAXRSTlMAQObYZgAAALVJREFUOMut0rENAjEQRNHdC4kY0QBaAQUQX0QAFSAKIKQEKiAA6VqgIkriApuV1x7pQPz0aWwHljLMpZ0CRDBGoXmeghGYKFJsUo90giAImCgV5OJF+oOgKE48MlGgs2VLBIunWesw0a1ZHqF82c7GmmIfUSpgotOly29DFPFJFDEhkgIT/V5mZuvj6XofKrHU6vyI4u37IYi36aN4h5tL7PJyif1dvCgEpapzISbCTEj5R78BZq5A5Ldh2XYAAAAASUVORK5CYII"></td>
+		                    <td>  <img src="data:image/png;base64,${product.productImage}"></td>
 		                    <td class="edit">${product.productCategory}</td>
-		                    <td><button type="submit" onclick="editProduct(this.id)" id="product-${product.productName}" class="btn"><span class="glyphicon glyphicon-edit"></span></button>&nbsp&nbsp&nbsp<button type="submit" onclick="deleteProduct(this.id)" id="product-${product.productName}" class="btn"><span class="glyphicon glyphicon-remove"></span></button></td>
+		                    <td><button type="submit" onclick="editProduct(this.id)" id="product-${product.productId}-edit" class="btn"><span class="glyphicon glyphicon-edit"></span></button>&nbsp&nbsp&nbsp<button type="submit" onclick="deleteProduct(this.id)" id="product-${product.productId}-delete" class="btn"><span class="glyphicon glyphicon-remove"></span></button></td>
 	                 	</tr>
 	                 </#list>	           
         </table>
@@ -43,9 +42,8 @@
     <script src="/billlive-sendsms/resources/js/bootstrap-editable.js"></script>
     
     
-    <script>
-    
-    $.fn.editable.defaults.mode = 'inline';
+<script>    
+$.fn.editable.defaults.mode = 'inline';
 $.fn.editable.defaults.showbuttons = true;
 $.fn.editable.defaults.url = '/post';
 $.fn.editable.defaults.type = 'text';
@@ -82,5 +80,4 @@ $('.edit').editable();
         }
     });
 });
-
 </script>

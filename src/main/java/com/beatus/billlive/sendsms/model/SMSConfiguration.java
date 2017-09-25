@@ -2,12 +2,14 @@ package com.beatus.billlive.sendsms.model;
 
 public class SMSConfiguration {
 	
+	private int configurationId;
 	private String smsUrl;
 	private String parameterUsername;
 	private String parameterPassword;
 	private String sendCode;
 	private String messageHeader;
 	private String messageFooter;
+	
 	public String getSmsUrl() {
 		return smsUrl;
 	}
@@ -44,7 +46,10 @@ public class SMSConfiguration {
 	public void setMessageFooter(String messageFooter) {
 		this.messageFooter = messageFooter;
 	}
-	
-	
-
+	public int getConfigurationId() {
+		return configurationId;
+	}
+	public void setConfigurationId(int configurationId) {
+		this.configurationId = configurationId;
+	}
 }

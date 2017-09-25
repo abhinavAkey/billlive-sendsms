@@ -39,15 +39,23 @@ public class SMSController {
     
     @RequestMapping(value = Constants.WEB_SMS_SEND_SMS_ADD_SCREEN_CONFIGURATION,
             method = RequestMethod.POST)
-    public String addSMSScreenPOST(HttpServletRequest request, SMSConfiguration smsConfiguration, ModelMap model) {
+    public String addSMSScreenPOST(HttpServletRequest request, SMSConfiguration smsConfiguration, ModelMap model) throws ClassNotFoundException, SQLException {
     	LOGGER.info("productNameLocAndPrice" + smsConfiguration.getSmsUrl());
-    	smsService.addSMSScreenConfiguration(request, smsConfiguration, model);
-        return Constants.REDIRECT + "/sms/getSmsConfiguration";
+    	String resp = smsService.addSMSScreenConfiguration(request, smsConfiguration, model);
+        return resp;
+    }
+    
+    @RequestMapping(value = Constants.WEB_SMS_SEND_SMS_EDIT_SCREEN_CONFIGURATION,
+            method = RequestMethod.POST)
+    public String editSMSScreenPOST(HttpServletRequest request, SMSConfiguration smsConfiguration, ModelMap model) throws SQLException {
+    	LOGGER.info("productNameLocAndPrice" + smsConfiguration.getSmsUrl());
+    	String resp = smsService.editSMSScreenConfiguration(request, smsConfiguration, model);
+        return resp;
     }
     
     @RequestMapping(value = Constants.WEB_SMS_SCREEN_GET_CONFIGURATION,
             method = RequestMethod.GET)
-    public String getSMSScreenConfiguration(HttpServletRequest request, ModelMap model) {
+    public String getSMSScreenConfiguration(HttpServletRequest request, ModelMap model) throws ClassNotFoundException, SQLException {
     	smsService.getSMSScreenConfiguration(model);
         return "sms/request-get";
     }

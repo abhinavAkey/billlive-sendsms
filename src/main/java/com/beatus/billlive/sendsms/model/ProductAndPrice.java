@@ -3,18 +3,18 @@ package com.beatus.billlive.sendsms.model;
 public class ProductAndPrice implements Comparable<ProductAndPrice>{
 
 	private String productName;
-	private double price;
+	private String price;
 	public String getProductName() {
 		return productName;
 	}
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-	public double getPrice() {
+	public String getPrice() {
 		return price;
 	}
-	public void setPrice(double d) {
-		this.price = d;
+	public void setPrice(String price) {
+		this.price = price;
 	}
 	@Override
 	public int compareTo(ProductAndPrice compare) {

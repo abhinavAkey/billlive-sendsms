@@ -26,7 +26,10 @@ import com.beatus.billlive.sendsms.model.LocationAndPrice;
 import com.beatus.billlive.sendsms.model.Product;
 import com.beatus.billlive.sendsms.model.ProductAndPrice;
 import com.beatus.billlive.sendsms.model.ProductWithLocationsAndPricesRequest;
+import com.beatus.billlive.sendsms.model.ProductsAndLocations;
 import com.beatus.billlive.sendsms.model.SMSConfiguration;
+import com.beatus.billlive.sendsms.repository.SMSRepository;
+import com.beatus.billlive.sendsms.utils.Constants;
 
 @Service
 @Component("smsService")
@@ -40,6 +43,9 @@ public class SMSService {
 
 	@Resource(name = "productService")
 	private ProductService productService;
+	
+	@Resource(name = "smsRepository")
+	private SMSRepository smsRepository;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SMSService.class);
 
@@ -50,13 +56,13 @@ public class SMSService {
 		List<Location> locations = locationService.getLocations();
 		Collections.sort(locations);
 		model.addAttribute("locations", locations);
-		List<Product> productsAndLocations = productService.getProductsAndLocations();
+		List<ProductsAndLocations> productsAndLocations = productService.getProductsAndLocations();
 
 		List<LocationAndPrice> locsAndPrices = new ArrayList<LocationAndPrice>();
 		for (int i = 0; i < locations.size(); i++) {
 			List<ProductAndPrice> productAndPrices = new ArrayList<ProductAndPrice>();
 			for (int j = 0; j < productsAndLocations.size(); j++) {
-				if (locations.get(i).getLocationName().equals(productsAndLocations.get(j).getProductLocation())) {
+				if (locations.get(i).getLocationName().equals(productsAndLocations.get(j).getProductLocationName())) {
 					ProductAndPrice productAndPrice = new ProductAndPrice();
 					productAndPrice.setProductName(productsAndLocations.get(j).getProductName());
 					productAndPrice.setPrice(productsAndLocations.get(j).getProductPrice());
@@ -136,14 +142,23 @@ public class SMSService {
 		}
 	}
 
-	public void addSMSScreenConfiguration(HttpServletRequest request, SMSConfiguration smsConfiguration,
-			ModelMap model) {
-				
+	public String addSMSScreenConfiguration(HttpServletRequest request, SMSConfiguration smsConfiguration,
+			ModelMap model) throws ClassNotFoundException, SQLException {
+		smsRepository.addSMSConfiguration(smsConfiguration);
+		return Constants.REDIRECT + "/sms/getSmsConfiguration";
 	}
 
-	public SMSConfiguration getSMSScreenConfiguration(ModelMap model) {
-		model.addAttribute("configuration", null);
-		return null;
+
+	public SMSConfiguration getSMSScreenConfiguration(ModelMap model) throws ClassNotFoundException, SQLException {
+		SMSConfiguration config = smsRepository.getSMSConfiguration();
+		model.addAttribute("configuration", config);
+		return config;
+	}
+
+	public String editSMSScreenConfiguration(HttpServletRequest request, SMSConfiguration smsConfiguration,
+			ModelMap model) throws SQLException {
+		smsRepository.editSMSConfiguration(smsConfiguration);
+		return Constants.REDIRECT + "/sms/getSmsConfiguration";
 	}
 
 }

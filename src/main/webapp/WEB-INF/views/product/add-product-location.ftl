@@ -27,7 +27,7 @@
                 <label for="productLocation">Product Location</label>
                 <select id="productLocation" name="productLocation" required>
                     <#list locations as location>
-                        <option value="${location.locationName}">${location.locationName}
+                        <option value="${location.locationId}">${location.locationName}
                         </option>
                     </#list>
                 </select>

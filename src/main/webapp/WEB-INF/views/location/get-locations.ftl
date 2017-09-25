@@ -16,11 +16,11 @@
             </thead>
 	                 <#list locations as location>
 	                 <tr>
-	                    <td><input type="text" onchange="changeLocation(this.id)" class="form-control" id="location-${location.locationName}" name="${location.locationName}" value="${location.locationName}"></td>
-	                    <td><input type="text" onchange="changeLocation(this.id)" class="form-control" id="location-${location.locationName}" name="${location.locationCity}" value="${location.locationCity}"></td>
-	                    <td><input type="text" onchange="changeLocation(this.id)" class="form-control" id="location-${location.locationName}" name="${location.locationDistrict}" value="${location.locationDistrict}"></td>
-	                    <td><input type="text" onchange="changeLocation(this.id)" class="form-control" id="location-${location.locationName}" name="${location.locationState}" value="${location.locationState}"></td>
-	                    <td><button type="submit" onclick="editLocation(this.id)" id="location-${location.locationName}" class="btn"><span class="glyphicon glyphicon-edit"></span></button>&nbsp&nbsp&nbsp<button type="submit" onclick="deleteLocation(this.id)" id="location-${location.locationName}" class="btn"><span class="glyphicon glyphicon-remove"></span></button></td>
+	                    <td><input type="text" onchange="changeLocation(this.id)" class="form-control" id="location-${location.locationId}-${location.locationName}" name="${location.locationName}" value="${location.locationName}"></td>
+	                    <td><input type="text" onchange="changeLocation(this.id)" class="form-control" id="location-${location.locationId}-${location.locationCity}" name="${location.locationCity}" value="${location.locationCity}"></td>
+	                    <td><input type="text" onchange="changeLocation(this.id)" class="form-control" id="location-${location.locationId}-${location.locationDistrict}" name="${location.locationDistrict}" value="${location.locationDistrict}"></td>
+	                    <td><input type="text" onchange="changeLocation(this.id)" class="form-control" id="location-${location.locationId}-${location.locationState}" name="${location.locationState}" value="${location.locationState}"></td>
+	                    <td><button type="submit" onclick="editLocation(this.id)" id="location-${location.locationId}-edit" class="btn"><span class="glyphicon glyphicon-edit"></span></button>&nbsp&nbsp&nbsp<button type="submit" onclick="deleteLocation(this.id)" id="location-${location.locationName}-delete" class="btn"><span class="glyphicon glyphicon-remove"></span></button></td>
 	                   </tr>
 	                 </#list>	           
         </table>
@@ -28,7 +28,3 @@
 </div>
 </div>
 </div>
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

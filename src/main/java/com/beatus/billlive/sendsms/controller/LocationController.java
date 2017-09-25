@@ -42,15 +42,15 @@ public class LocationController {
     @RequestMapping(value = Constants.WEB_LOCATION_ADD_LOCATION,
             method = RequestMethod.POST)
     public String addLocationPost(HttpServletRequest request, Location location, ModelMap model) throws ClassNotFoundException, SQLException {
-		locationService.addLocation(location);
-    	return Constants.REDIRECT + "/location/getLocations";
+		String resp = locationService.addLocation(location);
+    	return resp;
     }
     
     @RequestMapping(value = Constants.WEB_LOCATION_EDIT_LOCATION,
             method = RequestMethod.POST)
-    public String editLocationPost(HttpServletRequest request, Location location, ModelMap model) {
-		locationService.editLocation(location);
-    	return Constants.REDIRECT + "/location/getLocations";
+    public String editLocationPost(HttpServletRequest request, Location location, ModelMap model) throws SQLException {
+		String resp = locationService.editLocation(location);
+    	return resp;
     }
     
     @RequestMapping(value = Constants.WEB_LOCATION_GET_LOCATIONS,

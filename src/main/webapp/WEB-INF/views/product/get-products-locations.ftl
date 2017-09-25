@@ -14,10 +14,10 @@
             </thead>
 	                 <#list products as product>
 	                 <tr>
-	                    <th><input type="text" onchange="changeProduct(this.id)" class="form-control" id="product-${product.productName}" name="${product.productName}" value="${product.productName}"></th>
-	                    <th><input type="text" onchange="changeProduct(this.id)" class="form-control" id="product-${product.productName}" name="${product.productPrice}" value="${product.productPrice}"></th>
-	                    <th><input type="text" onchange="changeProduct(this.id)" class="form-control" id="product-${product.productName}" name="${product.productLocation}" value="${product.productLocation}"></th>
-	                    <th><button type="submit" onclick="editProduct(this.id)" id="product-${product.productName}" class="btn"><span class="glyphicon glyphicon-edit"></span></button>&nbsp&nbsp&nbsp<button type="submit" onclick="deleteProduct(this.id)" id="product-${product.productName}" class="btn"><span class="glyphicon glyphicon-remove"></span></button></th>
+	                    <th><input type="text" onchange="changeProduct(this.id)" class="form-control" id="product-${product.productId}-${product.productName}" name="${product.productName}" value="${product.productName}"></th>
+	                    <th><input type="text" onchange="changeProduct(this.id)" class="form-control" id="product-${product.productId}-${product.productPrice}" name="${product.productPrice}" value="${product.productPrice}"></th>
+	                    <th><input type="text" onchange="changeProduct(this.id)" class="form-control" id="product-${product.productId}-${product.productLocationName}" name="${product.productLocationName}" value="${product.productLocationName}"></th>
+	                    <th><button type="submit" onclick="editProduct(this.id)" id="product-${product.productId}-edit" class="btn"><span class="glyphicon glyphicon-edit"></span></button>&nbsp&nbsp&nbsp<button type="submit" onclick="deleteProduct(this.id)" id="product-${product.productId}-edit" class="btn"><span class="glyphicon glyphicon-remove"></span></button></th>
 	                 </tr>
 	                 </#list>	           
         </table>
@@ -25,7 +25,3 @@
 </div>
 </div>
 </div>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
