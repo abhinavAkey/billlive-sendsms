@@ -1,52 +1,55 @@
 package com.beatus.billlive.sendsms.service;
 
-import java.io.File;
-import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathFactory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 import com.beatus.billlive.sendsms.model.Distributor;
 import com.beatus.billlive.sendsms.model.Location;
-import com.beatus.billlive.sendsms.utils.Constants;
 
 @Service
 @Component("distributorService")
 public class DistributorService {
+	
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(DistributorService.class);
 
 	@Resource(name = "locationService")
     private LocationService locationService;
 	
-    public String addDistributor(Distributor distributor) {
-    	
-    	LOGGER.info("In addDistributor");
-    	
-    	ClassLoader classLoader = getClass().getClassLoader();
+	 public Connection getConnection() throws ClassNotFoundException{
+		 Class.forName("com.mysql.jdbc.Driver");
+
+	    	String dbURL = "jdbc:mysql://localhost:3306/billlive_sendsms";
+	    	String username = "root";
+	    	String password = "root";
+	    	Connection conn = null;
+	    	try {
+	    		conn = DriverManager.getConnection(dbURL, username, password);
+	    	if (conn != null) {
+	    	System.out.println("Connected");
+	    	}
+	    	} catch (SQLException ex) {
+	    	ex.printStackTrace();
+	    	}
+	    	LOGGER.info("In addDistributor");
+	    	return conn;
+		 
+	 }
+    public String addDistributor(Distributor distributor) throws ClassNotFoundException, SQLException {
+    	/*ClassLoader classLoader = getClass().getClassLoader();
     	File xmlFile = new File(classLoader.getResource("xml-datafiles/distributors.xml").getFile());
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder;
@@ -82,9 +85,21 @@ public class DistributorService {
 	            distributorEle.appendChild(e);
 	            
 	            docEle.appendChild(distributorEle);
+			}*/
+			String sql = "INSERT INTO distributor (distributorName, distributorPhone, distributorLocationId) VALUES (?, ?, ?)";
+			Connection conn = getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, distributor.getDistributorName());
+			statement.setString(2, distributor.getDistributorPhone());
+			statement.setInt(3, 1244);
+			
+			 
+			int rowsInserted = statement.executeUpdate();
+			if (rowsInserted > 0) {
+				LOGGER.info("A new distributor was inserted successfully!");
 			}
             
-			LOGGER.info("doc " + doc);
+			/*LOGGER.info("doc " + doc);
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource source = new DOMSource(doc);
@@ -93,17 +108,17 @@ public class DistributorService {
 			LOGGER.info("result " + result);
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 			transformer.transform(source, result);
-			LOGGER.info("XML file updated successfully");
+			LOGGER.info("XML file updated successfully");*/
             
-        }catch(Exception e){
+        /*}catch(Exception e){
         	return e.getMessage();
-        }
+        }*/
 		return "distributor/request-get";
     }
     
-    public List<Distributor> getDistributors() {
+    public List<Distributor> getDistributors() throws ClassNotFoundException, SQLException {
 		List<Distributor> distributors = new ArrayList<Distributor>();
-		Document dom;
+		/*Document dom;
 		// Make an instance of the DocumentBuilderFactory
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		try {
@@ -129,7 +144,7 @@ public class DistributorService {
 							String phone = el.getElementsByTagName(Constants.DISTRIBUTOR_PHONE).item(0).getTextContent();
 							distributor.setDistributorPhone(phone);
 							String location = el.getElementsByTagName(Constants.DISTRIBUTOR_LOCATION).item(0).getTextContent();
-							distributor.setDistributorLocation(location);
+							distributor.setLocationId(location);
 						}
 						distributors.add(distributor);
 					}
@@ -141,11 +156,22 @@ public class DistributorService {
 			LOGGER.info(se.getMessage());
 		} catch (IOException ioe) {
 			LOGGER.info(ioe.getMessage());
+		}*/
+		String sql = "SELECT * FROM distributor";
+		Connection conn = getConnection();
+		Statement statement = conn.createStatement();
+		ResultSet result = statement.executeQuery(sql);
+		while (result.next()){
+			Distributor distributor = new Distributor();
+			distributor.setDistributorName(result.getString("distributorName"));
+			distributor.setDistributorPhone(result.getString("distributorPhone"));
+			distributor.setLocationId(result.getInt("distributorLocationId"));
+			distributors.add(distributor);
 		}
 		return distributors;
 	}
 
-	public List<Location> getLocations() {
+	public List<Location> getLocations() throws ClassNotFoundException, SQLException {
 		return locationService.getLocations();
 	}
 

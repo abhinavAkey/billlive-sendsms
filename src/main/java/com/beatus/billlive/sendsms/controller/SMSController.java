@@ -1,5 +1,7 @@
 package com.beatus.billlive.sendsms.controller;
 
+import java.sql.SQLException;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,14 +32,14 @@ public class SMSController {
     
     @RequestMapping(value = Constants.WEB_SMS_SEND_SMS_SCREEN,
             method = RequestMethod.GET)
-    public String getSMSScreen(HttpServletRequest request, ModelMap model) {
+    public String getSMSScreen(HttpServletRequest request, ModelMap model) throws ClassNotFoundException, SQLException {
     	smsService.getSMSScreen(request, model);
         return "sms/request";
     }
     
     @RequestMapping(value = Constants.WEB_SMS_SEND_SMS_SCREEN,
             method = RequestMethod.POST)
-    public String getSMSScreenPOST(HttpServletRequest request, ProductWithLocationsAndPricesRequest productNameLocAndPrice, ModelMap model) {
+    public String getSMSScreenPOST(HttpServletRequest request, ProductWithLocationsAndPricesRequest productNameLocAndPrice, ModelMap model) throws ClassNotFoundException, SQLException {
     	LOGGER.info("productNameLocAndPrice" + productNameLocAndPrice.getProductNameLocAndPrice());
     	smsService.postSMSScreen(request, productNameLocAndPrice, model);
         return Constants.REDIRECT + "/sms/sendsmsScreen";

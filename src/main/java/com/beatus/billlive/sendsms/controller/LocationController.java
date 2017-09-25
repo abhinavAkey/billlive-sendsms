@@ -1,5 +1,6 @@
 package com.beatus.billlive.sendsms.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -40,7 +41,7 @@ public class LocationController {
     
     @RequestMapping(value = Constants.WEB_LOCATION_ADD_LOCATION,
             method = RequestMethod.POST)
-    public String addLocationPost(HttpServletRequest request, Location location, ModelMap model) {
+    public String addLocationPost(HttpServletRequest request, Location location, ModelMap model) throws ClassNotFoundException, SQLException {
 		locationService.addLocation(location);
     	return Constants.REDIRECT + "/location/getLocations";
     }
@@ -54,7 +55,7 @@ public class LocationController {
     
     @RequestMapping(value = Constants.WEB_LOCATION_GET_LOCATIONS,
             method = RequestMethod.GET)
-    public String getLocationsGet(HttpServletRequest request, ModelMap model) {
+    public String getLocationsGet(HttpServletRequest request, ModelMap model) throws ClassNotFoundException, SQLException {
     	List<Location> locations = locationService.getLocations();
     	LOGGER.info("After the get call and the locations are "  + locations != null? locations.size() > 0 ? locations.get(0).getLocationName() : "No Location data" : "No Location data");
         LocationResponse resp = new LocationResponse();

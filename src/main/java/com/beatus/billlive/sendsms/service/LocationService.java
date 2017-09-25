@@ -1,47 +1,50 @@
 package com.beatus.billlive.sendsms.service;
 
-import java.io.File;
-import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathFactory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 import com.beatus.billlive.sendsms.model.Location;
-import com.beatus.billlive.sendsms.utils.Constants;
 
 @Service
 @Component("locationService")
 public class LocationService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(LocationService.class);
+	public Connection getConnection() throws ClassNotFoundException{
+		 Class.forName("com.mysql.jdbc.Driver");
 
-	public String addLocation(Location location) {
+	    	String dbURL = "jdbc:mysql://localhost:3306/billlive_sendsms";
+	    	String username = "root";
+	    	String password = "root";
+	    	Connection conn = null;
+	    	try {
+	    		conn = DriverManager.getConnection(dbURL, username, password);
+	    	if (conn != null) {
+	    	System.out.println("Connected");
+	    	}
+	    	} catch (SQLException ex) {
+	    	ex.printStackTrace();
+	    	}
+	    	LOGGER.info("In addDistributor");
+	    	return conn;
+		 
+	 }
+	public String addLocation(Location location) throws ClassNotFoundException, SQLException {
 
 		LOGGER.info("In addLocation");
 
-		ClassLoader classLoader = getClass().getClassLoader();
+		/*ClassLoader classLoader = getClass().getClassLoader();
 		File xmlFile = new File(classLoader.getResource("xml-datafiles/locations.xml").getFile());
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder;
@@ -97,13 +100,27 @@ public class LocationService {
 
 		} catch (Exception e) {
 			return e.getMessage();
+		}*/
+		
+		String sql = "INSERT INTO location (locationName, locationCity, locationDistrict, locationState) VALUES (?, ?, ?, ?)";
+		Connection conn = getConnection();
+		PreparedStatement statement = conn.prepareStatement(sql);
+		statement.setString(1, location.getLocationName());
+		statement.setString(2, location.getLocationCity());
+		statement.setString(3, location.getLocationDistrict());
+		statement.setString(4, location.getLocationState());
+		
+		int rowsInserted = statement.executeUpdate();
+		if (rowsInserted > 0) {
+			LOGGER.info("A new distributor was inserted successfully!");
 		}
+
 		return "location/request-get";
 	}
 
-	public List<Location> getLocations() {
+	public List<Location> getLocations() throws ClassNotFoundException, SQLException {
 		List<Location> locations = new ArrayList<Location>();
-		Document dom;
+		/*Document dom;
 		// Make an instance of the DocumentBuilderFactory
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		try {
@@ -145,10 +162,39 @@ public class LocationService {
 			LOGGER.info(se.getMessage());
 		} catch (IOException ioe) {
 			LOGGER.info(ioe.getMessage());
+		}*/
+		
+		String sql = "SELECT * FROM location";
+		Connection conn = getConnection();
+		Statement statement = conn.createStatement();
+		ResultSet result = statement.executeQuery(sql);
+		while (result.next()){
+			Location location = new Location();
+			location.setLocationId(result.getInt("locationId"));
+			location.setLocationName(result.getString("locationName"));
+			location.setLocationState(result.getString("locationCity"));
+			location.setLocationCity(result.getString("locationDistrict"));
+			location.setLocationDistrict(result.getString("locationState"));
+			locations.add(location);
 		}
 		return locations;
 	}
-	
+	public Location getLocationById(int locationId) throws ClassNotFoundException, SQLException {
+		String sql = "SELECT * FROM location where locationId = ?";
+		Connection conn = getConnection();
+		PreparedStatement statement = conn.prepareStatement(sql);
+		statement.setInt(1, locationId);
+		ResultSet result = statement.executeQuery(sql);
+		Location location = new Location();
+		while (result.next()){
+			location.setLocationId(result.getInt("locationId"));
+			location.setLocationName(result.getString("locationName"));
+			location.setLocationState(result.getString("locationCity"));
+			location.setLocationCity(result.getString("locationDistrict"));
+			location.setLocationDistrict(result.getString("locationState"));
+		}
+		return location;
+	}
 	public void editLocation(Location location) {
 		
 	}

@@ -1,5 +1,6 @@
 package com.beatus.billlive.sendsms.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -37,7 +38,7 @@ public class SMSService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SMSService.class);
 
-	public void getSMSScreen(HttpServletRequest request, ModelMap model) {
+	public void getSMSScreen(HttpServletRequest request, ModelMap model) throws ClassNotFoundException, SQLException {
 		List<Product> products = productService.getProducts();
 		Collections.sort(products);
 		model.addAttribute("products", products);
@@ -68,7 +69,7 @@ public class SMSService {
 	}
 
 	public void postSMSScreen(HttpServletRequest request, ProductWithLocationsAndPricesRequest productNameLocAndPrice,
-			ModelMap model) {
+			ModelMap model) throws ClassNotFoundException, SQLException {
 
 		if (productNameLocAndPrice != null) {
 			if (productNameLocAndPrice.getProductNameLocAndPrice() != null
@@ -86,15 +87,15 @@ public class SMSService {
 						}
 						ProductAndPrice product = new ProductAndPrice();
 						product.setProductName(productLocationValue[1]);
-						product.setPrice(productLocationValue[2]);
+						//product.setPrice(productLocationValue[2]);
 						list.add(product);
 						productsUpdated.put(productLocationValue[0], list);
 					}
 				}
 				List<Distributor> distributors = distributorService.getDistributors();
 				for (Distributor distributor : distributors) {
-					if (distributor != null && productsUpdated.containsKey(distributor.getDistributorLocation())) {
-						List<ProductAndPrice> products = productsUpdated.get(distributor.getDistributorLocation());
+					if (distributor != null && productsUpdated.containsKey(distributor.getLocationId())) {
+						List<ProductAndPrice> products = productsUpdated.get(distributor.getLocationId());
 						String productsInfo = "A Message from So And So \n";
 						for (ProductAndPrice product : products) {
 							if (product != null) {
