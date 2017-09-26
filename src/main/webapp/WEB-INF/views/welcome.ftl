@@ -9,7 +9,7 @@
 
 <#include "tools_menu.ftl">
 
-    <div class="main" style="margin:30px; max-width:720px;">
+    <div class="main" style="margin:55px; max-width:720px;">
 
     <h1> Please click on any tabs from the side to perform your action</h1>
 

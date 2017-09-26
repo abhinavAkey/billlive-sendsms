@@ -64,7 +64,7 @@ public class SMSController {
             method = RequestMethod.GET)
     public String getSMSScreen(HttpServletRequest request, ModelMap model) throws ClassNotFoundException, SQLException {
     	smsService.getSMSScreen(request, model);
-        return Constants.REDIRECT + "/sms/sendsmsScreen";
+        return "sms/request";
     }
     
     @RequestMapping(value = Constants.WEB_SMS_SEND_SMS_SCREEN,

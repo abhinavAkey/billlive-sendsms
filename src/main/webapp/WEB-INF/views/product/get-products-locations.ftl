@@ -1,5 +1,5 @@
 <div class="its-request">
- <h1> Get Products</h1> 
+ <h1> Get Products And Locations</h1> 
  <div class="container">
     <div class="row col-md-12">
 <#if products?has_content >

@@ -56,7 +56,7 @@
                 <button type="reset" value="Reset" class="button-warning pure-button">Reset fields
                 </button>
 
-                <button type="submit" class="pure-button pure-button-primary">Add Location
+                <button type="submit" class="pure-button pure-button-primary">Add SMS Config
                 </button>
             </div>
         </fieldset>

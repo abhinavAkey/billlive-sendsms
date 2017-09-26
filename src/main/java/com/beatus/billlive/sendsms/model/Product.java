@@ -4,6 +4,7 @@ public class Product implements Comparable<Product>{
 	private int productId;
 	private String productName;
 	private byte[] productImage;
+	private String productImageString;
 	private String productCategory;
 	public int getProductId() {
 		return productId;
@@ -40,5 +41,13 @@ public class Product implements Comparable<Product>{
 	@Override
 	public int compareTo(Product compare) {
 		return this.productName.compareTo(compare.productName);
+	}
+
+	public String getProductImageString() {
+		return productImageString;
+	}
+
+	public void setProductImageString(String productImageString) {
+		this.productImageString = productImageString;
 	}	
 }

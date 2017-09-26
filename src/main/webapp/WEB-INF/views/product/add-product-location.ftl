@@ -5,8 +5,8 @@
         <fieldset>
 
             <div class="pure-control-group">
-                <label for="productName">Product Name</label>
-                <select id="productName" name="productName" required>
+                <label for="productId">Product Name</label>
+                <select id="productId" name="productId" required>
                     <#list products as product>
                         <option value="${product.productId}">${product.productName}
                         </option>
@@ -24,8 +24,8 @@
             </div>
             
             <div class="pure-control-group">
-                <label for="productLocation">Product Location</label>
-                <select id="productLocation" name="productLocation" required>
+                <label for="locationId">Product Location</label>
+                <select id="locationId" name="locationId" required>
                     <#list locations as location>
                         <option value="${location.locationId}">${location.locationName}
                         </option>
@@ -38,7 +38,7 @@
                 <button type="reset" value="Reset" class="button-warning pure-button">Reset fields
                 </button>
 
-                <button type="submit" class="pure-button pure-button-primary">Add Product
+                <button type="submit" class="pure-button pure-button-primary">Add Product Location
                 </button>
             </div>
         </fieldset>

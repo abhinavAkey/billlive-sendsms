@@ -5,7 +5,7 @@
 <body>
 <div id="layout">
 <#include "menu.ftl">
-    <div class="main" style="margin:30px; max-width:720px;">
+    <div class="main" style="margin:55px; max-width:720px;">
     <h1>Choose to Add/Get the distributors</h1>
     </div>
 </body>

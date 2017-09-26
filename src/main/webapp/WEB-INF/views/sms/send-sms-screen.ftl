@@ -3,9 +3,9 @@
         <div class="container">
     <div class="row col-md-12">
 <#if locsAndPrices?has_content>        
-        <table class="table table-striped" style="background-color: white;">
+        <table class="table table-striped table-bordered" style="background-color: white;">
             <thead>
-                <tr>
+                <tr style="background-color:#006400;color:white;" >
                     <th>Check</th>
                     <th></th>
                      <#list products as product>
@@ -32,7 +32,7 @@
 	            </tr>
             </#list>
         </table>       
-        <center><button type="submit" onclick="sendsms()" class="btn">Send SMS</button></center>
+        <center><button type="submit" onclick="sendsms()" class="pure-button pure-button-primary">Send SMS</button></center>
 </#if>     
 </div>
 </div>
