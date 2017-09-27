@@ -1,21 +1,36 @@
 package com.beatus.billlive.sendsms.config;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.stream.Stream;
+
+import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;;
+import org.springframework.stereotype.Service;
+
+import com.beatus.billlive.sendsms.encryption.KeyChain;
+import com.beatus.billlive.sendsms.encryption.KeyChainEntries;
+import com.beatus.billlive.sendsms.exception.CryptoException;;
 
 /**
  * Root class for the application's Spring configuration. This class is
@@ -53,6 +68,12 @@ public class ApplicationConfiguration {
     // Properities Configuration
     // ******************************************************************//
 
+	@Value("${keychain.file:billlive_key.xml}")
+	private String keyChainFile = "billlive_key.xml";
+	
+	@Resource(name = "keyChain")
+	private KeyChain keyChain;
+	
     @Bean
     @Profile("!test")
     public static PropertySourcesPlaceholderConfigurer pspc() {
@@ -87,10 +108,10 @@ public class ApplicationConfiguration {
     public Connection connection() throws ClassNotFoundException {
 		Class.forName("com.mysql.jdbc.Driver");
 
-		String dbURL = "jdbc:mysql://localhost:3306/sys?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-		//String dbURL = "jdbc:mysql://localhost:3306/billlive_db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+		//String dbURL = "jdbc:mysql://localhost:3306/sys?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+		String dbURL = "jdbc:mysql://localhost:3306/billlive_db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 		String username = "root";
-		String password = "root";
+		String password = "beatus_sqldb@99909";
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(dbURL, username, password);
@@ -102,5 +123,31 @@ public class ApplicationConfiguration {
 		}
 		LOGGER.info("In connection");
 		return conn;
+	}
+    
+    @Bean
+	public KeyChainEntries keyChainEntries() {
+		KeyChainEntries keyChainEntries = null;
+		try {
+			// ENC
+			// Load the googleKMS encrypted file.
+			ClassLoader loader = Thread.currentThread().getContextClassLoader();
+			URL resource = loader.getResource(keyChainFile);
+			// File billliveFile = new File(resource.toURI());
+			// InputStream encryptedStream = new FileInputStream(billliveFile);
+			StringBuilder contentBuilder = new StringBuilder();
+
+			try (Stream<String> stream = Files.lines(Paths.get(resource.toURI()), StandardCharsets.UTF_8)) {
+				stream.forEach(s -> contentBuilder.append(s).append("\n"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			byte[] fileInBytes = contentBuilder.toString().getBytes();
+			InputStream plainTextStream = new ByteArrayInputStream(fileInBytes);
+			keyChainEntries = keyChain.loadKeyChain(plainTextStream);
+		} catch (URISyntaxException | CryptoException e) {
+			LOGGER.info("Error while encrypting");
+		}
+		return keyChainEntries;
 	}
 }

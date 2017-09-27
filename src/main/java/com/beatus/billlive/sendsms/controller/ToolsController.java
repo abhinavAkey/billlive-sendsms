@@ -19,8 +19,8 @@ public class ToolsController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String sayHello(ModelMap model) {
-        model.addAttribute("message", "Identity Tools");
-        model.addAttribute("title", "Test page working!");
+        model.addAttribute("message", "Billlive");
+        model.addAttribute("title", "Billlive");
         return "welcome";
     }
 }

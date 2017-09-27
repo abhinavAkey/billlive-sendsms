@@ -1,5 +1,7 @@
 package com.beatus.billlive.sendsms.utils;
 
+import javax.crypto.spec.SecretKeySpec;
+
 public class Constants {
 
 	public static final String X_FRAME_OPTIONS = "X-Frame-Options";
@@ -49,4 +51,17 @@ public class Constants {
 	public static final String WEB_SMS_SEND_SMS_ADD_SCREEN_CONFIGURATION = "/addSmsConfiguration";
 	public static final String WEB_SMS_SCREEN_GET_CONFIGURATION = "/getSmsConfiguration";
 	public static final String WEB_SMS_SEND_SMS_EDIT_SCREEN_CONFIGURATION = "/editSmsConfiguration";
+	public static final String WEB_USER_REQUEST = "/user";
+	public static final String WEB_LOGIN = "/login";
+	public static final String WEB_USER_SIGNUP = "/signup";
+	public static final String AUTHENTICATED = "authenticated";
+	public static final String USER_CREATED = "userCreated";
+	public static final String ERROR_LOGIN = "There is some problem while login. Please try again";
+	public static final String CHAR_SET = "UTF-8";
+	public static final String AES = "AES";
+	public static final String HMACSHA256 = "HmacSHA256";
+	public static final String BILLLIVE_SENDSMS = "billlive-sendsms";
+	public static final String ERROR_USER_CREATION = "There is some problem creating the user. Please try again.";
+	public static final String USERNAME = "username";
+	public static final String WEB_LOGOUT = "/logout";
 }

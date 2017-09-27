@@ -40,6 +40,9 @@
                 <a href="/billlive-sendsms/sms/sendsmsScreen" class="pure-menu-link">Send SMS</a>
             </li>
             
+            <li class="pure-menu-item menu-item-divided" style="margin-top: 30px;">
+        		<a class="pure-menu-link" href="/billlive-sendsms/user/logout">Logout</a>
+            </li>
             
             <!--  <li class="pure-menu-item">
                 <a href="product/check_state" class="pure-menu-link">Check state</a>
