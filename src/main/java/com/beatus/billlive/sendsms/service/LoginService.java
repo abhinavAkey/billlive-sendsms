@@ -22,6 +22,7 @@ import com.beatus.billlive.sendsms.model.User;
 import com.beatus.billlive.sendsms.repository.LoginRepository;
 import com.beatus.billlive.sendsms.utils.Constants;
 import com.beatus.billlive.sendsms.utils.CookieManager;
+import com.beatus.billlive.sendsms.utils.Utils;
 
 @Component("loginService")
 public class LoginService {
@@ -57,6 +58,15 @@ public class LoginService {
 				Hash passwordHash = HashFactory.getInstance(Constants.HMACSHA256);
 				boolean isPasswordMatch = passwordHash.match(KEY, user.getPassword().getBytes(), hashedPasswordDB);
 				if (isPasswordMatch) {
+					User userRegisteredWithCompany = loginRepository.isUserRegistered(user.getUsername());
+					if(userRegisteredWithCompany != null){
+						Map<String, String> map = new HashMap<String, String>();
+						map.put(Constants.USERNAME, userRegisteredWithCompany.getUsername());
+						map.put(Constants.COMPANY_ID, userRegisteredWithCompany.getCompanyId());
+						map.put(Constants.USER_TYPE, userRegisteredWithCompany.getUserType());
+						String cookieValue = cookieManager.encryptCookieContent(map);
+						cookieManager.addCookieWithMaxAge(response, COOKIE_NAME, cookieValue, false, false, 54000);
+					}
 					return Constants.AUTHENTICATED;
 				} else {
 					return Constants.ERROR_LOGIN;
@@ -70,14 +80,30 @@ public class LoginService {
 		return loginResp;
 	}
 
-	public String createUser(User user) {
-		String loginResp;
+	public String addUserToCompany(User user, String companyId, String uid) {
+		String userCreatedResp;
+		try {
+			user.setCompanyId(companyId);
+			user.setUid(uid);
+			user.setUserType(Constants.USER);
+			userCreatedResp = createUser(user, companyId);
+			if(StringUtils.isNotBlank(userCreatedResp) && Constants.USER_CREATED.equalsIgnoreCase(userCreatedResp)){
+				userCreatedResp = loginRepository.addUserToCompany(user);
+			} 
+		} catch (SQLException e) {
+			userCreatedResp = Constants.ERROR_USER_CREATION;
+		}
+		return userCreatedResp;
+	}
+
+	public String createUser(User user, String companyId) {
+		String userCreatedResp;
 		try {
 			Hash passwordHash = HashFactory.getInstance(Constants.HMACSHA256);
 			byte[] hashedPassword = passwordHash.hash(KEY, user.getPassword().getBytes());
 			String macString = Base64.encodeBase64URLSafeString(hashedPassword);
 
-			// Encrypt teh password
+			// Encrypt the password
 			byte[] encryptionKey = keyChainEntries.getAesKeyBytes();
 			SecretKeySpec secretKey = new SecretKeySpec(encryptionKey, Constants.AES);
 			EncryptionFactory.Encryption enc = EncryptionFactory.getInstance(secretKey.getAlgorithm());
@@ -85,12 +111,27 @@ public class LoginService {
 			String encPasswordStringWithHash = Base64.encodeBase64URLSafeString(encBytes);
 
 			user.setPassword(encPasswordStringWithHash);
+			if(StringUtils.isBlank(user.getUid())){
+				user.setUid(user.getUsername());
+			}
+			if(StringUtils.isBlank(user.getUserType())){
+				user.setUserType(Constants.USER_ADMIN);
+			}
+			if(StringUtils.isBlank(companyId)){
+			    companyId = Utils.generateRandomKey(20);
+				user.setCompanyId(companyId);
+			}else {
+				user.setCompanyId(companyId);
+			}
+			userCreatedResp = loginRepository.addUser(user);
+			if(StringUtils.isNotBlank(userCreatedResp) && Constants.USER_CREATED.equalsIgnoreCase(userCreatedResp)){
+				userCreatedResp = loginRepository.addUserToCompany(user);
+			}
 
-			loginResp = loginRepository.addUser(user);
 		} catch (ClassNotFoundException | UnsupportedEncodingException | SQLException e) {
-			loginResp = Constants.ERROR_USER_CREATION;
+			userCreatedResp = Constants.ERROR_USER_CREATION;
 		}
-		return loginResp;
+		return userCreatedResp;
 	}
 
 	public void logoutUser(HttpServletRequest request, HttpServletResponse response) {

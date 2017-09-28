@@ -1,6 +1,6 @@
 package com.beatus.billlive.sendsms.model;
 
-public class ProductsAndLocations {
+public class ProductsAndLocations  extends BaseData{
 
 	private int productLocationId;
 	private String productName;

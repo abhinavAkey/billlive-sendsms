@@ -42,21 +42,36 @@ public class LocationController {
     @RequestMapping(value = Constants.WEB_LOCATION_ADD_LOCATION,
             method = RequestMethod.POST)
     public String addLocationPost(HttpServletRequest request, Location location, ModelMap model) throws ClassNotFoundException, SQLException {
-		String resp = locationService.addLocation(location);
+    	String companyId = (String) request.getAttribute(Constants.COMPANY_ID);
+		String uid = (String) request.getAttribute(Constants.USERNAME);
+    	String resp = locationService.addLocation(location, companyId, uid);
     	return resp;
     }
     
     @RequestMapping(value = Constants.WEB_LOCATION_EDIT_LOCATION,
             method = RequestMethod.POST)
     public String editLocationPost(HttpServletRequest request, Location location, ModelMap model) throws SQLException {
-		String resp = locationService.editLocation(location);
+    	String companyId = (String) request.getAttribute(Constants.COMPANY_ID);
+		String uid = (String) request.getAttribute(Constants.USERNAME);
+    	String resp = locationService.editLocation(location, companyId, uid);
+    	return resp;
+    }
+    
+    @RequestMapping(value = Constants.WEB_LOCATION_DELETE_LOCATION,
+            method = RequestMethod.POST)
+    public String deleteLocationPost(HttpServletRequest request, Location location, ModelMap model) throws SQLException {
+    	String companyId = (String) request.getAttribute(Constants.COMPANY_ID);
+		String uid = (String) request.getAttribute(Constants.USERNAME);
+    	String resp = locationService.deleteLocation(location.getLocationId(), companyId, uid);
     	return resp;
     }
     
     @RequestMapping(value = Constants.WEB_LOCATION_GET_LOCATIONS,
             method = RequestMethod.GET)
     public String getLocationsGet(HttpServletRequest request, ModelMap model) throws ClassNotFoundException, SQLException {
-    	List<Location> locations = locationService.getLocations();
+    	String companyId = (String) request.getAttribute(Constants.COMPANY_ID);
+    	
+    	List<Location> locations = locationService.getLocations(companyId);
     	LOGGER.info("After the get call and the locations are "  + locations != null? locations.size() > 0 ? locations.get(0).getLocationName() : "No Location data" : "No Location data");
         LocationResponse resp = new LocationResponse();
         resp.setLocations(locations);

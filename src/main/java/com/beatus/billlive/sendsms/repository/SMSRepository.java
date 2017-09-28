@@ -13,9 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import com.beatus.billlive.sendsms.model.Distributor;
 import com.beatus.billlive.sendsms.model.SMSConfiguration;
-import com.beatus.billlive.sendsms.utils.Constants;
 
 @Component("smsRepository")
 public class SMSRepository {
@@ -29,13 +27,13 @@ public class SMSRepository {
 	public void addSMSConfiguration(SMSConfiguration config) throws ClassNotFoundException, SQLException {
 
 		LOGGER.info("In addSMS");
-		SMSConfiguration smsConfigurationFromDB = getSMSConfiguration();
+		SMSConfiguration smsConfigurationFromDB = getSMSConfiguration(config.getCompanyId());
 		if (smsConfigurationFromDB != null && StringUtils.isNotBlank(smsConfigurationFromDB.getSmsUrl())) {
 			config.setConfigurationId(smsConfigurationFromDB.getConfigurationId());
 			editSMSConfiguration(config);
 		} else {
 			String sql = "INSERT INTO sms_configuration (sms_url, parameter_username, parameter_password, "
-					+ "send_code, message_header, message_footer) VALUES (?, ?, ?, ?, ?, ?)";
+					+ "send_code, message_header, message_footer, company_id, uid) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, config.getSmsUrl());
@@ -44,6 +42,8 @@ public class SMSRepository {
 			statement.setString(4, config.getSendCode());
 			statement.setString(5, config.getMessageHeader());
 			statement.setString(6, config.getMessageFooter());
+			statement.setString(7, config.getCompanyId());
+			statement.setString(8, config.getUid());
 
 			int rowsInserted = statement.executeUpdate();
 			if (rowsInserted > 0) {
@@ -53,12 +53,13 @@ public class SMSRepository {
 
 	}
 
-	public SMSConfiguration getSMSConfiguration() throws ClassNotFoundException, SQLException {
+	public SMSConfiguration getSMSConfiguration(String companyId) throws ClassNotFoundException, SQLException {
 		SMSConfiguration config = null;
-		String sql = "SELECT * FROM sms_configuration";
+		String sql = "SELECT * FROM sms_configuration WHERE company_id =?";
 
-		Statement statement = conn.createStatement();
-		ResultSet result = statement.executeQuery(sql);
+		PreparedStatement statement = conn.prepareStatement(sql);
+		statement.setString(1, companyId);
+		ResultSet result = statement.executeQuery();
 		while (result.next()) {
 			config = new SMSConfiguration();
 			config.setConfigurationId(result.getInt("configuration_id"));
@@ -68,6 +69,8 @@ public class SMSRepository {
 			config.setSendCode(result.getString("send_code"));
 			config.setMessageHeader(result.getString("message_header"));
 			config.setMessageFooter(result.getString("message_footer"));
+			config.setCompanyId(result.getString("company_id"));
+			config.setUid(result.getString("uid"));
 			break;
 		}
 		return config;
@@ -75,7 +78,7 @@ public class SMSRepository {
 
 	public void editSMSConfiguration(SMSConfiguration config) throws SQLException {
 		String sql = "UPDATE sms_configuration SET sms_url = ?, parameter_username = ?, parameter_password = ?, "
-				+ "send_code = ?, message_header = ?, message_footer = ? WHERE configuration_id = ?";
+				+ "send_code = ?, message_header = ?, message_footer = ?, company_id = ?, uid = ? WHERE configuration_id = ?";
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setString(1, config.getSmsUrl());
 		statement.setString(2, config.getParameterUsername());
@@ -83,7 +86,9 @@ public class SMSRepository {
 		statement.setString(4, config.getSendCode());
 		statement.setString(5, config.getMessageHeader());
 		statement.setString(6, config.getMessageFooter());
-		statement.setInt(7, config.getConfigurationId());
+		statement.setString(7, config.getCompanyId());
+		statement.setString(8, config.getUid());
+		statement.setInt(9, config.getConfigurationId());
 
 		int rowsInserted = statement.executeUpdate();
 		if (rowsInserted > 0) {

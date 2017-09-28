@@ -1,6 +1,6 @@
 package com.beatus.billlive.sendsms.model;
 
-public class SMSConfiguration {
+public class SMSConfiguration  extends BaseData{
 	
 	private int configurationId;
 	private String smsUrl;

@@ -26,7 +26,7 @@ public class LoginRepository {
 	public String addUser(User user) throws ClassNotFoundException, SQLException {
 
 		LOGGER.info("In adduser");
-		String sql = "INSERT INTO users (username, password, firstname, lastname, email, phone) VALUES (?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO users (username, password, firstname, lastname, email, phone, company_id, company_name, uid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setString(1, user.getUsername());
@@ -35,6 +35,9 @@ public class LoginRepository {
 		statement.setString(4, user.getLastname());
 		statement.setString(5, user.getEmail());
 		statement.setString(6, user.getPhone());
+		statement.setString(7, user.getCompanyId());
+		statement.setString(8, user.getCompanyName());
+		statement.setString(9, user.getUid());
 
 		int rowsInserted = statement.executeUpdate();
 		if (rowsInserted > 0) {
@@ -60,6 +63,46 @@ public class LoginRepository {
 			user.setLastname(result.getString("lastname"));
 			user.setEmail(result.getString("email"));
 			user.setPhone(result.getString("phone"));
+			user.setCompanyId(result.getString("company_id"));
+			user.setCompanyName(result.getString("company_name"));
+			user.setUid(result.getString("uid"));
+		}
+		return user;
+	}
+
+	public String addUserToCompany(User user) throws SQLException {
+		LOGGER.info("In adduserToCompany");
+		String sql = "INSERT INTO company_users (username, company_id, user_type, uid) VALUES (?, ?, ?, ?)";
+
+		PreparedStatement statement = conn.prepareStatement(sql);
+		statement.setString(1, user.getUsername());
+		statement.setString(2, user.getCompanyId());
+		statement.setString(3, user.getUserType());
+		statement.setString(4, user.getUid());
+
+		int rowsInserted = statement.executeUpdate();
+		if (rowsInserted > 0) {
+			LOGGER.info("A new user was inserted successfully!");
+			return Constants.USER_CREATED;
+		}else {
+			return Constants.ERROR_USER_CREATION;
+		}
+	}
+	
+	public User isUserRegistered(String username) throws SQLException{
+		String sql = "SELECT * FROM company_users WHERE username = ?";
+
+		PreparedStatement statement = conn.prepareStatement(sql);
+		statement.setString(1, username);
+		User user = null;
+
+		ResultSet result = statement.executeQuery();
+		while (result.next()) {
+			user = new User();
+			user.setUsername(result.getString("username"));
+			user.setCompanyId(result.getString("company_id"));
+			user.setUserType(result.getString("user_type"));
+			user.setUid(result.getString("uid"));
 		}
 		return user;
 	}

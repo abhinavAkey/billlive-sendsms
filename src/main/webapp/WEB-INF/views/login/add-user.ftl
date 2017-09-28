@@ -21,6 +21,14 @@
             </div>
             
             <div class="pure-control-group">
+                <label for="companyName">Company Name</label>
+                <input type="text" name="companyName" id="companyName" placeholder="Company Name"
+                       required>
+                <span class="pure-form-message-inline">Required</span>
+
+            </div>
+            
+            <div class="pure-control-group">
                 <label for="firstname">Firstname</label>
                 <input type="text" name="firstname" id="firstname" placeholder="Firstname"
                        required>

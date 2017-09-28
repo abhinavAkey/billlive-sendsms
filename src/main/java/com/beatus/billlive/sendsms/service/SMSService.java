@@ -49,14 +49,14 @@ public class SMSService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SMSService.class);
 
-	public void getSMSScreen(HttpServletRequest request, ModelMap model) throws ClassNotFoundException, SQLException {
-		List<Product> products = productService.getProducts();
+	public void getSMSScreen(HttpServletRequest request, ModelMap model, String companyId) throws ClassNotFoundException, SQLException {
+		List<Product> products = productService.getProducts(companyId);
 		Collections.sort(products);
 		model.addAttribute("products", products);
-		List<Location> locations = locationService.getLocations();
+		List<Location> locations = locationService.getLocations(companyId);
 		Collections.sort(locations);
 		model.addAttribute("locations", locations);
-		List<ProductsAndLocations> productsAndLocations = productService.getProductsAndLocations();
+		List<ProductsAndLocations> productsAndLocations = productService.getProductsAndLocations(companyId);
 
 		List<LocationAndPrice> locsAndPrices = new ArrayList<LocationAndPrice>();
 		for (int i = 0; i < locations.size(); i++) {
@@ -80,7 +80,7 @@ public class SMSService {
 	}
 
 	public void postSMSScreen(HttpServletRequest request, ProductWithLocationsAndPricesRequest productNameLocAndPrice,
-			ModelMap model) throws ClassNotFoundException, SQLException {
+			ModelMap model, String companyId, String uid) throws ClassNotFoundException, SQLException {
 
 		if (productNameLocAndPrice != null) {
 			if (productNameLocAndPrice.getProductNameLocAndPrice() != null
@@ -103,11 +103,12 @@ public class SMSService {
 						productsUpdated.put(productLocationValue[0], list);
 					}
 				}
-				List<Distributor> distributors = distributorService.getDistributors();
+				List<Distributor> distributors = distributorService.getDistributors(companyId);
+				int smsCount = 0;
 				for (Distributor distributor : distributors) {
 					if (distributor != null && productsUpdated.containsKey(distributor.getLocationId())) {
 						List<ProductAndPrice> products = productsUpdated.get(distributor.getLocationId());
-						SMSConfiguration config = getSMSScreenConfiguration(model);
+						SMSConfiguration config = getSMSScreenConfiguration(model, companyId);
 						String productsInfo = config.getMessageHeader();
 						for (ProductAndPrice product : products) {
 							if (product != null) {
@@ -132,31 +133,39 @@ public class SMSService {
 						String response = "";
 						try {
 							response = new HttpApiCall(5000, 5000).get(urlBuilder.toString());
+							if(response.contains(Constants.OK)){
+								smsCount += smsCount;
+							}
 							LOGGER.debug("responded with [{}]", response);
 						} catch (IOException ioe) {
 							LOGGER.error(ioe.toString());
 						}
 					}
 				}
+				// TO-DO update smsCount in database and also specify which SMS not sent on the UI.
 			}
 		}
 	}
 
 	public String addSMSScreenConfiguration(HttpServletRequest request, SMSConfiguration smsConfiguration,
-			ModelMap model) throws ClassNotFoundException, SQLException {
+			ModelMap model, String companyId, String uid) throws ClassNotFoundException, SQLException {
+		smsConfiguration.setCompanyId(companyId);
+		smsConfiguration.setUid(uid);
 		smsRepository.addSMSConfiguration(smsConfiguration);
 		return Constants.REDIRECT + "/sms/getSmsConfiguration";
 	}
 
 
-	public SMSConfiguration getSMSScreenConfiguration(ModelMap model) throws ClassNotFoundException, SQLException {
-		SMSConfiguration config = smsRepository.getSMSConfiguration();
+	public SMSConfiguration getSMSScreenConfiguration(ModelMap model, String companyId) throws ClassNotFoundException, SQLException {
+		SMSConfiguration config = smsRepository.getSMSConfiguration(companyId);
 		model.addAttribute("configuration", config);
 		return config;
 	}
 
 	public String editSMSScreenConfiguration(HttpServletRequest request, SMSConfiguration smsConfiguration,
-			ModelMap model) throws SQLException {
+			ModelMap model, String companyId, String uid) throws SQLException {
+		smsConfiguration.setCompanyId(companyId);
+		smsConfiguration.setUid(uid);
 		smsRepository.editSMSConfiguration(smsConfiguration);
 		return Constants.REDIRECT + "/sms/getSmsConfiguration";
 	}

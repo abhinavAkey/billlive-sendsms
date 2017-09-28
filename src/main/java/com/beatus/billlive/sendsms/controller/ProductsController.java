@@ -45,7 +45,10 @@ public class ProductsController {
             method = RequestMethod.POST)
     public String addProductPost(HttpServletRequest request, Product product, ModelMap model) throws ClassNotFoundException, SQLException {
     	LOGGER.info("In addProductPost");
-    	String resp = productService.addProduct(product);
+    	String companyId = (String) request.getAttribute(Constants.COMPANY_ID);
+		String uid = (String) request.getAttribute(Constants.USERNAME);
+    	
+    	String resp = productService.addProduct(product, companyId, uid);
 		LOGGER.info("product======="+product.toString());
     	return resp;
     }
@@ -54,16 +57,21 @@ public class ProductsController {
             method = RequestMethod.POST)
     public String editProductPost(HttpServletRequest request, Product product, ModelMap model) throws SQLException {
     	LOGGER.info("In addProductPost");
-		String resp = productService.editProduct(product);
+    	String companyId = (String) request.getAttribute(Constants.COMPANY_ID);
+		String uid = (String) request.getAttribute(Constants.USERNAME);
+    	
+		String resp = productService.editProduct(product, companyId, uid);
     	return resp;
     }
     
     @RequestMapping(value = Constants.WEB_PRODUCTS_ADD_PRODUCT_AND_LOCATION,
             method = RequestMethod.GET)
     public String addProductAndLocationsGet(HttpServletRequest request, ModelMap model) throws ClassNotFoundException, SQLException {
-    	List<Product> products = productService.getProducts();
+    	String companyId = (String) request.getAttribute(Constants.COMPANY_ID);
+    	
+    	List<Product> products = productService.getProducts(companyId);
     	model.addAttribute("products", products);
-    	List<Location> locations = productService.getLocations();
+    	List<Location> locations = productService.getLocations(companyId);
     	model.addAttribute("locations", locations);
         return "product/request-product-location-add";
     }
@@ -72,7 +80,10 @@ public class ProductsController {
             method = RequestMethod.POST)
     public String addProductAndLocationPost(HttpServletRequest request, ProductsAndLocations product, ModelMap model) throws ClassNotFoundException, SQLException {
     	LOGGER.info("In addProductPost");
-		String resp = productService.addProductAndLocation(product);
+    	String companyId = (String) request.getAttribute(Constants.COMPANY_ID);
+		String uid = (String) request.getAttribute(Constants.USERNAME);
+    	
+		String resp = productService.addProductAndLocation(product, companyId, uid);
     	return resp;
     }
     
@@ -80,14 +91,19 @@ public class ProductsController {
             method = RequestMethod.POST)
     public String editProductAndLocationPost(HttpServletRequest request, ProductsAndLocations product, ModelMap model) throws SQLException {
     	LOGGER.info("In addProductPost");
-		String resp = productService.editProductAndLocation(product);
+    	String companyId = (String) request.getAttribute(Constants.COMPANY_ID);
+		String uid = (String) request.getAttribute(Constants.USERNAME);
+    	
+		String resp = productService.editProductAndLocation(product, companyId, uid);
     	return resp;
     }
     
     @RequestMapping(value = Constants.WEB_PRODUCTS_GET_PRODUCTS,
             method = RequestMethod.GET)
     public String getProductsGet(HttpServletRequest request, ModelMap model) throws ClassNotFoundException, SQLException {
-    	List<Product> products = productService.getProducts();
+    	String companyId = (String) request.getAttribute(Constants.COMPANY_ID);
+    	
+    	List<Product> products = productService.getProducts(companyId);
     	LOGGER.info("After the get call and the products are "  + products != null? products.size() > 0 ? products.get(0).getProductName() : "No Product data" : "No Product data");
     	ProductsResponse resp = new ProductsResponse();
         resp.setProducts(products);
@@ -99,12 +115,32 @@ public class ProductsController {
     @RequestMapping(value = Constants.WEB_PRODUCTS_GET_PRODUCTS_AND_LOCATIONS,
             method = RequestMethod.GET)
     public String getProductsAndLocationsGet(HttpServletRequest request, ModelMap model) throws ClassNotFoundException, SQLException {
-    	List<ProductsAndLocations> products = productService.getProductsAndLocations();
+    	String companyId = (String) request.getAttribute(Constants.COMPANY_ID);
+    	
+    	List<ProductsAndLocations> products = productService.getProductsAndLocations(companyId);
     	LOGGER.info("After the get call and the products are "  + products != null? products.size() > 0 ? products.get(0).getProductName() : "No Product data" : "No Product data");
     	ProductsAndLocationsResponse resp = new ProductsAndLocationsResponse();
         resp.setProductsAndLocations(products);
     	model.addAttribute("productsResp", resp); 
     	model.addAttribute("products", products); 
     	return "product/request-products-locations-get";
+    }
+    
+    @RequestMapping(value = Constants.WEB_PRODUCTS_DELETE_PRODUCTS,
+            method = RequestMethod.POST)
+    public String deleteProductPost(HttpServletRequest request, Product product, ModelMap model) throws SQLException {
+    	String companyId = (String) request.getAttribute(Constants.COMPANY_ID);
+		String uid = (String) request.getAttribute(Constants.USERNAME);
+    	String resp = productService.deleteProduct(product.getProductId(), companyId, uid);
+    	return resp;
+    }
+    
+    @RequestMapping(value = Constants.WEB_PRODUCTS_DELETE_PRODUCTS_AND_LOCATIONS,
+            method = RequestMethod.POST)
+    public String deleteProductsAndLocationsPost(HttpServletRequest request, ProductsAndLocations product, ModelMap model) throws SQLException {
+    	String companyId = (String) request.getAttribute(Constants.COMPANY_ID);
+		String uid = (String) request.getAttribute(Constants.USERNAME);
+    	String resp = productService.deleteProductAndLocations(product.getProductLocationId(), companyId, uid);
+    	return resp;
     }
 }

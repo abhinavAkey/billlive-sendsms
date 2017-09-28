@@ -49,6 +49,8 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 		} else {
 			if (cookieContent != null) {
 				request.setAttribute(Constants.USERNAME, cookieContent.get(Constants.USERNAME));
+				request.setAttribute(Constants.COMPANY_ID, cookieContent.get(Constants.COMPANY_ID));
+				request.setAttribute(Constants.USER_TYPE, cookieContent.get(Constants.USER_TYPE));
 			}
 		}
 		return true;

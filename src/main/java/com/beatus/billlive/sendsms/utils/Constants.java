@@ -1,7 +1,5 @@
 package com.beatus.billlive.sendsms.utils;
 
-import javax.crypto.spec.SecretKeySpec;
-
 public class Constants {
 
 	public static final String X_FRAME_OPTIONS = "X-Frame-Options";
@@ -47,7 +45,7 @@ public class Constants {
 	public static final String WEB_LOCATION_EDIT_LOCATION = "/editLocation";
 	public static final String WEB_PRODUCTS_EDIT_PRODUCT = "/editProduct";
 	public static final String WEB_PRODUCTS_EDIT_PRODUCT_AND_LOCATION = "/editProductsAndLocations";
-	public static final String WEB_DISTRIBUTOR_EDIT_DISTRIBUTOR = "editDistributor";
+	public static final String WEB_DISTRIBUTOR_EDIT_DISTRIBUTOR = "/editDistributor";
 	public static final String WEB_SMS_SEND_SMS_ADD_SCREEN_CONFIGURATION = "/addSmsConfiguration";
 	public static final String WEB_SMS_SCREEN_GET_CONFIGURATION = "/getSmsConfiguration";
 	public static final String WEB_SMS_SEND_SMS_EDIT_SCREEN_CONFIGURATION = "/editSmsConfiguration";
@@ -64,4 +62,14 @@ public class Constants {
 	public static final String ERROR_USER_CREATION = "There is some problem creating the user. Please try again.";
 	public static final String USERNAME = "username";
 	public static final String WEB_LOGOUT = "/logout";
+	public static final String USER = "user";
+	public static final String USER_ADMIN = "admin";
+	public static final String COMPANY_ID = "companyId";
+	public static final String USER_TYPE = "userType";
+	public static final String WEB_USER_ADD_COMPANY_USER = "/addCompanyUser";
+	public static final CharSequence OK = "OK";
+	public static final String WEB_DISTRIBUTOR_DELETE_DISTRIBUTOR = "/deleteDistributor";
+	public static final String WEB_LOCATION_DELETE_LOCATION = "/deleteLocation";
+	public static final String WEB_PRODUCTS_DELETE_PRODUCTS_AND_LOCATIONS = "/deleteProductsAndLocations";
+	public static final String WEB_PRODUCTS_DELETE_PRODUCTS = "/deleteProduct";
 }

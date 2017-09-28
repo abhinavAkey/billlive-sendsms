@@ -41,7 +41,10 @@ public class SMSController {
             method = RequestMethod.POST)
     public String addSMSScreenPOST(HttpServletRequest request, SMSConfiguration smsConfiguration, ModelMap model) throws ClassNotFoundException, SQLException {
     	LOGGER.info("productNameLocAndPrice" + smsConfiguration.getSmsUrl());
-    	String resp = smsService.addSMSScreenConfiguration(request, smsConfiguration, model);
+    	String companyId = (String) request.getAttribute(Constants.COMPANY_ID);
+		String uid = (String) request.getAttribute(Constants.USERNAME);
+    	
+    	String resp = smsService.addSMSScreenConfiguration(request, smsConfiguration, model, companyId, uid);
         return resp;
     }
     
@@ -49,21 +52,28 @@ public class SMSController {
             method = RequestMethod.POST)
     public String editSMSScreenPOST(HttpServletRequest request, SMSConfiguration smsConfiguration, ModelMap model) throws SQLException {
     	LOGGER.info("productNameLocAndPrice" + smsConfiguration.getSmsUrl());
-    	String resp = smsService.editSMSScreenConfiguration(request, smsConfiguration, model);
+    	String companyId = (String) request.getAttribute(Constants.COMPANY_ID);
+		String uid = (String) request.getAttribute(Constants.USERNAME);
+    	
+    	String resp = smsService.editSMSScreenConfiguration(request, smsConfiguration, model, companyId, uid);
         return resp;
     }
     
     @RequestMapping(value = Constants.WEB_SMS_SCREEN_GET_CONFIGURATION,
             method = RequestMethod.GET)
     public String getSMSScreenConfiguration(HttpServletRequest request, ModelMap model) throws ClassNotFoundException, SQLException {
-    	smsService.getSMSScreenConfiguration(model);
+    	String companyId = (String) request.getAttribute(Constants.COMPANY_ID);
+    	
+    	smsService.getSMSScreenConfiguration(model, companyId);
         return "sms/request-get";
     }
     
     @RequestMapping(value = Constants.WEB_SMS_SEND_SMS_SCREEN,
             method = RequestMethod.GET)
     public String getSMSScreen(HttpServletRequest request, ModelMap model) throws ClassNotFoundException, SQLException {
-    	smsService.getSMSScreen(request, model);
+    	String companyId = (String) request.getAttribute(Constants.COMPANY_ID);
+    	
+    	smsService.getSMSScreen(request, model, companyId);
         return "sms/request";
     }
     
@@ -71,7 +81,10 @@ public class SMSController {
             method = RequestMethod.POST)
     public String getSMSScreenPOST(HttpServletRequest request, ProductWithLocationsAndPricesRequest productNameLocAndPrice, ModelMap model) throws ClassNotFoundException, SQLException {
     	LOGGER.info("productNameLocAndPrice" + productNameLocAndPrice.getProductNameLocAndPrice());
-    	smsService.postSMSScreen(request, productNameLocAndPrice, model);
+    	String companyId = (String) request.getAttribute(Constants.COMPANY_ID);
+		String uid = (String) request.getAttribute(Constants.USERNAME);
+    	
+    	smsService.postSMSScreen(request, productNameLocAndPrice, model, companyId, uid);
         return Constants.REDIRECT + "/sms/sendsmsScreen";
     }
 }

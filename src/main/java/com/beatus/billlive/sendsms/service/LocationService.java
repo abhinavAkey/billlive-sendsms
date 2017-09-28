@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.beatus.billlive.sendsms.model.Location;
 import com.beatus.billlive.sendsms.repository.LocationRepository;
+import com.beatus.billlive.sendsms.utils.Constants;
 
 @Service
 @Component("locationService")
@@ -22,26 +23,44 @@ public class LocationService {
 	@Resource(name = "locationRepository")
 	private LocationRepository locationRepository;
 	
-	public String addLocation(Location location) throws ClassNotFoundException, SQLException {
+	public String addLocation(Location location, String companyId, String uid) throws ClassNotFoundException, SQLException {
 		LOGGER.info("In addLocation");
+		location.setCompanyId(companyId);
+		location.setUid(uid);
+		
 		String resp = locationRepository.addLocation(location);
 		return resp;
 	}
 	
-	public String editLocation(Location location) throws SQLException {
+	public String editLocation(Location location, String companyId, String uid) throws SQLException {
 		LOGGER.info("In editLocation");
+		location.setCompanyId(companyId);
+		location.setUid(uid);
+
 		String resp = locationRepository.editLocation(location);
 		return resp;	
 	}
 
-	public List<Location> getLocations() throws ClassNotFoundException, SQLException {
+	public List<Location> getLocations(String companyId) throws ClassNotFoundException, SQLException {
 		LOGGER.info("In getLocations");
-		List<Location> locations = locationRepository.getLocations();
+		List<Location> locations = locationRepository.getLocations(companyId);
 		return locations;
 	}
-	public Location getLocationById(int locationId) throws ClassNotFoundException, SQLException {
+	public Location getLocationById(int locationId, String companyId) throws ClassNotFoundException, SQLException {
 		LOGGER.info("In getLocationById");
-		Location location = locationRepository.getLocationById(locationId);
+		Location location = locationRepository.getLocationById(locationId, companyId);
 		return location;
+	}
+
+	public String deleteLocation(int locationId, String companyId, String uid) throws SQLException {
+		LOGGER.info("In deleteLocation");
+
+		boolean isDeleted = locationRepository.deleteLocation(locationId, companyId);
+		if(isDeleted){
+			return Constants.REDIRECT + "/location/getLocations";
+		}else {
+			//TO-DO add a message that the row is not deleted
+			return Constants.REDIRECT + "/location/getLocations";
+		}
 	}
 }

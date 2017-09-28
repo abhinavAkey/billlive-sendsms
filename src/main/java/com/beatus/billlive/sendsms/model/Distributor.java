@@ -1,6 +1,6 @@
 package com.beatus.billlive.sendsms.model;
 
-public class Distributor {
+public class Distributor extends BaseData{
 	private int distributorId;
 	private String distributorName;
 	private String distributorPhone;

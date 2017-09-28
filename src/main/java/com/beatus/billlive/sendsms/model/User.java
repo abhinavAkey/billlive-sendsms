@@ -1,6 +1,6 @@
 package com.beatus.billlive.sendsms.model;
 
-public class User {
+public class User extends BaseData{
 
 	private String username;
 	private String password;
@@ -8,6 +8,8 @@ public class User {
 	private String lastname;
 	private String email;
 	private String phone;
+	private String companyName;
+
 	public String getUsername() {
 		return username;
 	}
@@ -43,5 +45,11 @@ public class User {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 }

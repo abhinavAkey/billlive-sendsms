@@ -52,10 +52,6 @@ public class LoginController {
     public String loginPost(HttpServletRequest request, HttpServletResponse response, User user, ModelMap model) throws ClassNotFoundException, SQLException {
 		String authenticatedResp = loginService.checkLogin(user, request, response);
 		if(StringUtils.isNotBlank(authenticatedResp) && Constants.AUTHENTICATED.equalsIgnoreCase(authenticatedResp)){
-			Map<String, String> map = new HashMap<String, String>();
-			map.put(Constants.USERNAME, user.getUsername());
-			String cookieValue = cookieManager.encryptCookieContent(map);
-			cookieManager.addCookieWithMaxAge(response, COOKIE_NAME, cookieValue, false, false, 86400);
 			return Constants.REDIRECT + "/";
 		}else {
 			model.addAttribute("errorResp", authenticatedResp);
@@ -79,9 +75,23 @@ public class LoginController {
     @RequestMapping(value = Constants.WEB_USER_SIGNUP,
             method = RequestMethod.POST)
     public String signupPost(HttpServletRequest request, User user, ModelMap model) throws ClassNotFoundException, SQLException {
-		String signupResp = loginService.createUser(user);
+		String signupResp = loginService.createUser(user, null);
 		if(StringUtils.isNotBlank(signupResp) && Constants.USER_CREATED.equalsIgnoreCase(signupResp)){
 			return Constants.REDIRECT + "/user/login";
+		}else {
+			model.addAttribute("errorResp", signupResp);
+			return "login/request-signup";
+		}
+    }
+    
+    @RequestMapping(value = Constants.WEB_USER_ADD_COMPANY_USER,
+            method = RequestMethod.POST)
+    public String addCompanyUserPost(HttpServletRequest request, User user, ModelMap model) throws ClassNotFoundException, SQLException {
+		String companyId = (String) request.getAttribute(Constants.COMPANY_ID);
+		String uid = (String) request.getAttribute(Constants.USERNAME);
+    	String signupResp = loginService.addUserToCompany(user, companyId, uid);
+		if(StringUtils.isNotBlank(signupResp) && Constants.USER_CREATED.equalsIgnoreCase(signupResp)){
+			return Constants.REDIRECT + "/user/profile";
 		}else {
 			model.addAttribute("errorResp", signupResp);
 			return "login/request-signup";

@@ -29,16 +29,18 @@ public class DistributorRepository {
 
 	public String addDistributor(Distributor distributor) throws ClassNotFoundException, SQLException {
 
-		Distributor distributorFromDB = getDistributorByDistributorName(distributor.getDistributorName());
+		Distributor distributorFromDB = getDistributorByDistributorName(distributor.getDistributorName(), distributor.getCompanyId());
 		if (distributorFromDB != null && StringUtils.isNotBlank(distributorFromDB.getDistributorName())) {
 			distributor.setDistributorId(distributorFromDB.getDistributorId());
 			editDistributor(distributor);
 		} else {
-			String sql = "INSERT INTO distributor (distributor_name, distributor_phone, location_id) VALUES (?, ?, ?)";
+			String sql = "INSERT INTO distributor (distributor_name, distributor_phone, location_id, company_id, uid) VALUES (?, ?, ?, ?, ?)";
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, distributor.getDistributorName());
 			statement.setString(2, distributor.getDistributorPhone());
 			statement.setInt(3, distributor.getLocationId());
+			statement.setString(4, distributor.getCompanyId());
+			statement.setString(5, distributor.getUid());
 
 			int rowsInserted = statement.executeUpdate();
 			if (rowsInserted > 0) {
@@ -50,12 +52,14 @@ public class DistributorRepository {
 
 	public String editDistributor(Distributor distributor) throws ClassNotFoundException, SQLException {
 
-		String sql = "UPDATE distributor SET distributor_name= ?, distributor_phone= ?, location_id= ? WHERE distributor_id = ?";
+		String sql = "UPDATE distributor SET distributor_name= ?, distributor_phone= ?, location_id= ?, company_id = ?, uid = ? WHERE distributor_id = ?";
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setString(1, distributor.getDistributorName());
 		statement.setString(2, distributor.getDistributorPhone());
 		statement.setInt(3, distributor.getLocationId());
-		statement.setInt(4, distributor.getDistributorId());
+		statement.setString(4, distributor.getCompanyId());
+		statement.setString(5, distributor.getUid());
+		statement.setInt(6, distributor.getDistributorId());
 
 		int rowsInserted = statement.executeUpdate();
 		if (rowsInserted > 0) {
@@ -64,11 +68,16 @@ public class DistributorRepository {
 		return Constants.REDIRECT + "/distributor/getDistributors";
 	}
 
-	public Distributor getDistributorById(int id) throws ClassNotFoundException, SQLException {
+	public Distributor getDistributorById(int id, String companyId) throws ClassNotFoundException, SQLException {
 		Distributor distributor = new Distributor();
-		String sql = "SELECT dist.distributor_id AS distributorId, dist.distributor_name AS distributorName, dist.distributor_phone AS distributorPhone, loc.location_id AS distributorLocationId, loc.location_name AS distributorLocationName FROM distributor dist, location loc WHERE distributor_id = ? AND dist.location_id=loc.location_id";
+		String sql = "SELECT dist.distributor_id AS distributorId, dist.distributor_name AS distributorName, dist.distributor_phone AS distributorPhone, "
+				+ "loc.location_id AS distributorLocationId, loc.location_name AS distributorLocationName "
+				+ "FROM distributor dist, location loc "
+				+ "WHERE distributor_id = ? AND dist.location_id=loc.location_id AND dist.company_id = loc.company_id "
+				+ "AND dist.company_id = ?";
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setInt(1, id);
+		statement.setString(2, companyId);
 		ResultSet result = statement.executeQuery();
 		while (result.next()) {
 			distributor.setDistributorId(result.getInt("distributorId"));
@@ -81,11 +90,16 @@ public class DistributorRepository {
 		return distributor;
 	}
 	
-	public Distributor getDistributorByDistributorName(String name) throws ClassNotFoundException, SQLException {
+	public Distributor getDistributorByDistributorName(String name, String companyId) throws ClassNotFoundException, SQLException {
 		Distributor distributor = new Distributor();
-		String sql = "SELECT dist.distributor_id AS distributorId, dist.distributor_name AS distributorName, dist.distributor_phone AS distributorPhone, loc.location_id AS distributorLocationId, loc.location_name AS distributorLocationName FROM distributor dist, location loc WHERE distributor_name = ? AND dist.location_id=loc.location_id";
+		String sql = "SELECT dist.distributor_id AS distributorId, dist.distributor_name AS distributorName, dist.distributor_phone AS distributorPhone, "
+				+ "loc.location_id AS distributorLocationId, loc.location_name AS distributorLocationName "
+				+ "FROM distributor dist, location loc "
+				+ "WHERE distributor_name = ? AND dist.location_id=loc.location_id AND dist.company_id = loc.company_id "
+				+ "AND dist.company_id = ?";
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setString(1, name);
+		statement.setString(2, companyId);
 		ResultSet result = statement.executeQuery();
 		while (result.next()) {
 			distributor.setDistributorId(result.getInt("distributorId"));
@@ -98,11 +112,16 @@ public class DistributorRepository {
 		return distributor;
 	}
 
-	public List<Distributor> getDistributors() throws ClassNotFoundException, SQLException {
+	public List<Distributor> getDistributors(String companyId) throws ClassNotFoundException, SQLException {
 		List<Distributor> distributors = new ArrayList<Distributor>();
-		String sql = "SELECT dist.distributor_id AS distributorId, dist.distributor_name AS distributorName, dist.distributor_phone AS distributorPhone, loc.location_id AS distributorLocationId, loc.location_name AS distributorLocationName FROM distributor dist, location loc WHERE dist.location_id=loc.location_id";
-		Statement statement = conn.createStatement();
-		ResultSet result = statement.executeQuery(sql);
+		String sql = "SELECT dist.distributor_id AS distributorId, dist.distributor_name AS distributorName, dist.distributor_phone AS distributorPhone,"
+				+ " loc.location_id AS distributorLocationId, loc.location_name AS distributorLocationName "
+				+ "FROM distributor dist, location loc "
+				+ "WHERE dist.location_id=loc.location_id AND dist.company_id = loc.company_id "
+				+ "AND dist.company_id = ?";
+		PreparedStatement statement = conn.prepareStatement(sql);
+		statement.setString(1, companyId);
+		ResultSet result = statement.executeQuery();
 		while (result.next()) {
 			Distributor distributor = new Distributor();
 			distributor.setDistributorId(result.getInt("distributorId"));
@@ -113,5 +132,16 @@ public class DistributorRepository {
 			distributors.add(distributor);
 		}
 		return distributors;
+	}
+
+	public boolean deleteDistributor(int distributorId, String companyId) throws SQLException {
+		String sql = "DELETE FROM distributor where distributor_id = ? AND company_id = ?";
+
+		PreparedStatement statement = conn.prepareStatement(sql);
+		statement.setInt(1, distributorId);
+		statement.setString(2, companyId);
+
+		boolean result = statement.execute();
+		return result;
 	}
 }

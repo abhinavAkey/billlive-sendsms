@@ -1,6 +1,6 @@
 package com.beatus.billlive.sendsms.model;
 
-public class Location implements Comparable<Location>{
+public class Location  extends BaseData implements Comparable<Location>{
 
 	private int locationId;
 	private String locationName;

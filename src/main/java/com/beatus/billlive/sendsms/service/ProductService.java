@@ -28,58 +28,90 @@ public class ProductService {
 	@Resource(name = "productRepository")
 	private ProductRepository productRepository;
 
-	public String addProductAndLocation(ProductsAndLocations product) throws ClassNotFoundException, SQLException {
+	public String addProductAndLocation(ProductsAndLocations product, String companyId, String uid) throws ClassNotFoundException, SQLException {
 		LOGGER.info("In addProductAndLocation");
+		product.setCompanyId(companyId);
+		product.setUid(uid);
 		productRepository.addProductAndLocation(product);
 		return Constants.REDIRECT + "/product/getProductsAndLocations";
 	}
 
-	public String addProduct(Product product) throws ClassNotFoundException, SQLException {
+	public String addProduct(Product product, String companyId, String uid) throws ClassNotFoundException, SQLException {
 		LOGGER.info("In addProductAndLocation");
+		product.setCompanyId(companyId);
+		product.setUid(uid);
 		productRepository.addProduct(product);
 		return Constants.REDIRECT + "/product/getProducts";
 	}
 
-	public List<ProductsAndLocations> getProductsAndLocations() throws ClassNotFoundException, SQLException {
+	public List<ProductsAndLocations> getProductsAndLocations(String companyId) throws ClassNotFoundException, SQLException {
 		LOGGER.info("In addProductAndLocation");
-		List<ProductsAndLocations> products = productRepository.getProductsAndLocations();
+		List<ProductsAndLocations> products = productRepository.getProductsAndLocations(companyId);
 		return products;
 	}
 
-	public List<Product> getProducts() throws ClassNotFoundException, SQLException {
+	public List<Product> getProducts(String companyId) throws ClassNotFoundException, SQLException {
 		LOGGER.info("In addProductAndLocation");
-		List<Product> products = productRepository.getProducts();
+		List<Product> products = productRepository.getProducts(companyId);
 		return products;
 	}
 
-	public Product getProductById(int productId) throws ClassNotFoundException, SQLException {
+	public Product getProductById(int productId, String companyId) throws ClassNotFoundException, SQLException {
 		LOGGER.info("In addProductAndLocation");
-		Product product = productRepository.getProductById(productId);
+		Product product = productRepository.getProductById(productId, companyId);
 		return product;
 	}
 
-	public ProductsAndLocations getProductAndLocationById(int productId, int locationId)
+	public ProductsAndLocations getProductAndLocationById(int productId, int locationId, String companyId)
 			throws ClassNotFoundException, SQLException {
 		LOGGER.info("In addProductAndLocation");
-		ProductsAndLocations product = productRepository.getProductAndLocationById(productId, locationId);
+		ProductsAndLocations product = productRepository.getProductAndLocationById(productId, locationId, companyId);
 		return product;
 	}
 
-	public List<Location> getLocations() throws ClassNotFoundException, SQLException {
+	public List<Location> getLocations(String companyId) throws ClassNotFoundException, SQLException {
 		LOGGER.info("In addProductAndLocation");
-		return locationService.getLocations();
+		return locationService.getLocations(companyId);
 	}
 
-	public String editProductAndLocation(ProductsAndLocations product) throws SQLException {
+	public String editProductAndLocation(ProductsAndLocations product, String companyId, String uid) throws SQLException {
 		LOGGER.info("In addProductAndLocation");
+		product.setCompanyId(companyId);
+		product.setUid(uid);
 		productRepository.editProductAndLocation(product);
 		return Constants.REDIRECT + "/product/getProductsAndLocations";
 	}
 
-	public String editProduct(Product product) throws SQLException {
+	public String editProduct(Product product, String companyId, String uid) throws SQLException {
 		LOGGER.info("In addProductAndLocation");
+		product.setCompanyId(companyId);
+		product.setUid(uid);
 		productRepository.editProduct(product);
 		return Constants.REDIRECT + "/product/getProducts";
+	}
+	
+	public String deleteProduct(int productId, String companyId, String uid) throws SQLException {
+		LOGGER.info("In deleteProduct");
+
+		boolean isDeleted = productRepository.deleteProduct(productId, companyId);
+		if(isDeleted){
+			return Constants.REDIRECT + "/product/getProducts";
+		}else {
+			//TO-DO add a message that the row is not deleted
+			return Constants.REDIRECT + "/product/getProducts";
+		}
+	}
+	
+	public String deleteProductAndLocations(int productLocationId, String companyId, String uid) throws SQLException {
+		LOGGER.info("In deleteProductAndLocations");
+
+		boolean isDeleted = productRepository.deleteProductsAndLocations(productLocationId, companyId);
+		if(isDeleted){
+			return Constants.REDIRECT + "/product/getProductsAndLocations";
+		}else {
+			//TO-DO add a message that the row is not deleted
+			return Constants.REDIRECT + "/product/getProductsAndLocations";
+		}
 	}
 
 }

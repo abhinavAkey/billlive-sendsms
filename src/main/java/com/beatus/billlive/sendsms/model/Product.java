@@ -1,6 +1,6 @@
 package com.beatus.billlive.sendsms.model;
 
-public class Product implements Comparable<Product>{
+public class Product  extends BaseData implements Comparable<Product>{
 	private int productId;
 	private String productName;
 	private byte[] productImage;

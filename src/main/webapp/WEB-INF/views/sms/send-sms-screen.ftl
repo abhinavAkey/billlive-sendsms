@@ -3,7 +3,7 @@
         <div class="container">
     <div class="row col-md-12">
 <#if locsAndPrices?has_content>        
-        <table class="table table-striped table-bordered" style="background-color: white;">
+        <table class="table table-striped table-bordered" style="width: 85%; background-color: white;">
             <thead>
                 <tr style="background-color:#006400;color:white;" >
                     <th>Check</th>
