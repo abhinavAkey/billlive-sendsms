@@ -36,6 +36,8 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 	private final static String REAL_IMG_PATH = "/resources/img/";
 
     private final static String REAL_JS_PATH = "/resources/js/";
+    
+    private final static String REAL_FONTS_PATH = "/resources/fonts/";
 
     private final static String REAL_ASSETS_PATH = "/resources/assets/";
 
@@ -49,6 +51,9 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 
     @Value("/resources/js/*")
     private String versionedJsPath;
+    
+    @Value("/resources/fonts/*")
+    private String versionedFontsPath;
 
     @Value("/resources/assets/*")
     private String versionedAssetsPath;
@@ -98,6 +103,9 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 
         registry.addResourceHandler(versionedJsPath).addResourceLocations(REAL_JS_PATH)
             .setCachePeriod(Integer.MAX_VALUE);
+        
+        registry.addResourceHandler(versionedFontsPath).addResourceLocations(REAL_FONTS_PATH)
+        .setCachePeriod(Integer.MAX_VALUE);
 
         registry.addResourceHandler(versionedAssetsPath).addResourceLocations(REAL_ASSETS_PATH)
             .setCachePeriod(Integer.MAX_VALUE);

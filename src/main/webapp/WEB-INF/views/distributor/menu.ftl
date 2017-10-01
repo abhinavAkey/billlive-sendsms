@@ -4,7 +4,7 @@
     <span></span></a>
 <div id="menu">
     <div class="pure-menu">
-        <a class="pure-menu-heading" href="/billlive-sendsms/distributor">Distributors</a>
+        <a class="pure-menu-heading" href="/billlive-sendsms/">Billlive Send SMS</a>
         <ul class="pure-menu-list">
             <li class="pure-menu-item">
                 <a href="/billlive-sendsms/location/addLocation" class="pure-menu-link">Add Locations</a>
