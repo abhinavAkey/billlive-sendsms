@@ -46,8 +46,9 @@
             
              <div class="pure-control-group">
                 <label for="email">Email</label>
-                <input type="text" name="email" id="email" placeholder="Email">
-
+                <input type="text" name="email" id="email" placeholder="Email"
+                		required>
+                <span class="pure-form-message-inline">Required</span>
             </div>
             
             <div class="pure-control-group">

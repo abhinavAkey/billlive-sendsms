@@ -78,7 +78,7 @@
 		<div class="col-xs-12 text-center abcen1">
 			<div id="layout">
 			<#include "menu.ftl">
-			    <div class="main" style=" max-width:720px;">
+			    <div class="main" style=" max-width:720px;  padding: 0px;">
     			<#include "get-configuration.ftl">
 			    <#include "response.ftl">
 			    </div>

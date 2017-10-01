@@ -1,13 +1,13 @@
     <div class="its-request">
-        <h1>Billlive Send SMS</h1><br><br>
+        <h1 style="text-align: left; margin-left: 16%;">Billlive Send SMS</h1><br>
         <div class="container">
     <div class="row col-md-12">
 <#if locsAndPrices?has_content>        
-        <table class="table table-striped table-bordered" style="width: 85%; background-color: white;">
+        <table class="table table-bordered" style="width: 85%; margin-left: 10%;">
             <thead>
-                <tr style="background-color:#006400;color:white;" >
+                <tr>
                     <th>Check</th>
-                    <th></th>
+                    <th>Locations</th>
                      <#list products as product>
 	                    <th><strong>${product.productName}</strong><br><input type="text" onchange="changeValues(this.id)" class="form-control" id="product-${product.productName}" name="${product.productName}" value=""></th>
 	                 </#list>
@@ -36,7 +36,3 @@
 </#if>     
 </div>
 </div>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-

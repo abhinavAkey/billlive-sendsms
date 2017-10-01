@@ -1,17 +1,18 @@
 <div class="its-request">
- <h1> Get Configurations</h1>
+ <h1> Get Configurations</h1><br>
   <div class="container">
     <div class="row col-md-12">
  <#if configuration?has_content>
-            <table class="table table-striped table-bordered" style="width: 85%; background-color:white;">
+            <table class="table table-bordered" style="width: 85%; margin-left: 10%;">
             <thead>
-                <tr style="background-color:#006400;color:white;">
+                <tr >
                      <th>SMS Url</th>
                      <th>Parameter Username</th>
                      <th>Parameter Password</th>
                      <th>Send Code</th>
                      <th>Message Header</th>
                      <th>Message Footer</th>
+                     <th></th>
                 </tr>
             </thead>
 	            <tr>
