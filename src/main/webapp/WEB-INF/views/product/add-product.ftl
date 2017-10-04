@@ -137,12 +137,10 @@
                 <div class="col-lg-3">
                         <div class="form-group">
                                 <label for="margin" class="col-lg-12 control-label">Margin On</label>
-                                <label class="radio-inline">
-                                        <input type="radio" name="marginOn" id="isMarginOnMrp" value="" checked>MRP
-                                 </label>
-                              <label class="radio-inline">
-                                    <input type="radio" name="marginOn" id="isMarginOnSalesPrice" value="">Sales Price
-                              </label>
+                                <input type="radio" name="marginOn" id="isMarginOnMrp" value="MRP" style="margin-top: -2px;" checked />
+                                <label for="isMarginOnMrp"  style="margin-right: 3px;">MRP</label>
+                                <input type="radio" name="marginOn" id="isMarginOnSalesPrice" value="SalesPrice" style="margin-top: -2px;" />
+                                <label for="isMarginOnSalesPrice">Sales Price</label>
                         </div>
                 </div>
                 <div class="col-lg-3">
