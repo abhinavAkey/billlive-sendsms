@@ -99,7 +99,7 @@
 	<!-- Product Details -->
 	<div id="credits" class="content-section-a">
 		<div class="container">
-			<div class="row" style = "margin-left: 125px;">
+			<div class="row" style = "margin-left: 160px;">
 			
 			<div class="col-md-6 col-md-offset-3 text-center wrap_title">
 				<h2>Product Details</h2>
@@ -120,21 +120,21 @@
 			  <div class="col-sm-6 block wow bounceIn">
 					<div class="row">
 					  <div class="col-md-4 box-icon rotate"> 
-						<i class="fa fa-picture-o fa-4x "> </i> 
+						<i class="fa fa-mobile-phone fa-4x "> </i> 
 					  </div>
 					  <div class="col-md-8 box-ct">
 						<h3> SMS Service </h3>
-						<p> You can send sms to all your distributors or customers about your prices and dues.</p> 
+						<p> Send sms to all your distributors or customers about your prices and dues.</p> 
 					  </div>
 					</div>
 			  </div>
 		  </div>
 		  
-		  <div class="row tworow" style = "margin-left: 125px;">
+		  <div class="row tworow" style = "margin-left: 160px;">
 				<div class="col-sm-6  block wow bounceIn">
 					<div class="row">
 						<div class="col-md-4 box-icon rotate"> 
-							<i class="fa fa-magic fa-4x "> </i> 
+							<i class="fa fa-bar-chart-o fa-4x "> </i> 
 						</div>
 						<div class="col-md-8 box-ct">
 							<h3> Charts </h3>
@@ -145,11 +145,11 @@
 			  <div class="col-sm-6 block wow bounceIn">
 					<div class="row">
 					  <div class="col-md-4 box-icon rotate"> 
-						<i class="fa fa-heart fa-4x "> </i> 
+						<i class="fa fa-file-text-o fa-4x "> </i> 
 					  </div>
 					  <div class="col-md-8 box-ct">
-						<h3> Inventory Management</h3>
-						<p> We keep track of the items that needs to be re-ordered, helping you know your inventory better.</p> 
+						<h3> GST Return Filing</h3>
+						<p> Generate monthly/yearly GST reports. We keep track of all the bills, items and inventories associated with transactions for GST return filing.</p> 
 					  </div>
 					</div>
 			  </div>
