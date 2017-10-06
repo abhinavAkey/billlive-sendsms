@@ -72,4 +72,7 @@ public class Constants {
 	public static final String WEB_LOCATION_DELETE_LOCATION = "/deleteLocation";
 	public static final String WEB_PRODUCTS_DELETE_PRODUCTS_AND_LOCATIONS = "/deleteProductsAndLocations";
 	public static final String WEB_PRODUCTS_DELETE_PRODUCTS = "/deleteProduct";
+    public static final String WEB_GET_BILLS = "/bills";
+    public static final String WEB_PRODUCTS_GET_PRODUCT_BY_ID = "/getProductById";
+
 }

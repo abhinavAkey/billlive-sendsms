@@ -395,9 +395,30 @@ function sendsms() {
 	this.serviceCalls(serviceObject, this.processSavePasswordResponse);
 
 }
+
 function processSavePasswordResponse(data) {
 	
 }
+
+function getProductById(id){
+	var http = location.protocol;
+	var slashes = http.concat("//");
+	var host = slashes.concat(window.location.host);
+	var webapi = host + "/billlive-sendsms/product/getproductById";
+
+	var serviceObject = {
+		url : webapi,
+		data : {
+			productLocationId : name,
+			productId : productId,
+			locationId : locationId,
+			productPrice :productPrice
+		}
+	};
+	this.serviceCalls(serviceObject, this.processSavePasswordResponse);
+
+}
+
 
 function serviceCalls(serviceObject, success, fail) {
 	$.ajax({

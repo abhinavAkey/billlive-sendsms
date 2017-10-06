@@ -113,8 +113,8 @@ public class ApplicationConfiguration {
     public Connection connection() throws ClassNotFoundException {
 		Class.forName("com.mysql.jdbc.Driver");
 
-	    String dbURL = "jdbc:mysql://localhost:3306/sys?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-		//String dbURL = "jdbc:mysql://localhost:3306/billlive_db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+	    //String dbURL = "jdbc:mysql://localhost:3306/sys?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+		String dbURL = "jdbc:mysql://localhost:3306/billlive_db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 		String username = "root";
 		String password = "root";
 		Connection conn = null;

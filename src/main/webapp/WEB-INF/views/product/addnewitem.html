@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<style>
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<h2>Modal Example</h2>
+
+<!-- Trigger/Open The Modal -->
+<button id="myBtn">Open Modal</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div class="container">
+            <h1>Add New Item</h1><br>
+            <form>
+                <div class="form-row">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                        <label for="product name" class="col-lg-12 control-label">Product Name</label>
+                         <input type="text" class="form-control" placeholder="Product Name" id="pname" name="pname" value="">
+                         </div>
+                    </div>
+                    <div class="col-lg-3">
+                            <div class="form-group">
+                            <label for="product category" class="col-lg-12 control-label">Product Category</label>
+                             <input type="text" class="form-control" placeholder="Product Catogery" id="pcatogery" name="pcategory" value="">
+                             </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                        <label for="Brand name" class="col-lg-12 control-label">Brand Name</label>
+                         <input type="text" class="form-control" placeholder="Brand Name" id="brand" name="brand" value="">
+                         </div>
+                    </div>
+                    <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="hsncode" class="col-lg-12 control-label">HSN Code</label>
+                                <input type="text" class="form-control" placeholder="Enter HSN Code" id="hsncode" name="hsncode" value="">
+                            </div>
+                    </div>
+                     <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="cptax" class="col-lg-12 control-label">Cost Price Excl Tax</label>
+                                <input type="text" class="form-control" placeholder="0.00" id="cptax" name="cptax" value="">
+                            </div>
+                    </div>
+                    <div class="col-lg-3">
+                            <div class="form-group">
+                        <label for="Quantity type" class="col-lg-12 control-label">Quantity Type</label>
+                        <select class="form-control" id="qtytype" name="qtytype" value="">
+                            <option value="">Choose Item Type</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="quantity" class="col-lg-6 control-label">Quantity(Recieved)</label>
+                            <input type="text" class="form-control" placeholder="0" id="quantity" name="quantity" value="">
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="freequantity" class="col-lg-12 control-label">Total Available Quantity</label>
+                            <input type="text" class="form-control" placeholder="0" id="freequantity" name="freequantity" value="">
+                        </div>
+                     </div>
+                     <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="taxableamt" class="col-lg-12 control-label">Taxeble Amount</label>
+                                <input type="text" class="form-control" placeholder="0.00" id="taxableamt" name="taxableamt" value="">
+                            </div>
+                    </div>
+                    <div class="form-group col-lg-3">
+                            <label for="gst" class="col-lg-12 control-label">GST(Tax rates)</label>
+                            <select id="gst" class="form-control" id="gst" name="gst" value="">
+                                <option value="">Select Tax</option>
+                            </select>
+                    </div>
+                    <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="Tax Amount" class="col-lg-12 control-label">Tax Amount</label>
+                                <input type="text" class="form-control" placeholder="0" id="taxamount" name="taxamount" value="">
+                            </div>
+                    </div>
+                        <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="cp" class="col-lg-12 control-label">Cost Price Incl. Tax(per Unit)</label>
+                                    <input type="text" class="form-control" placeholder="0" id="cp" name="cp" value="">
+                                </div>
+                        </div>
+                        <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="marinper" class="col-lg-12 control-label">Margin (In %)</label>
+                                    <input type="text" class="form-control" placeholder="0.00" id="marinper" name="marinper" value="">
+                                </div>
+                        </div>
+                        <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="marinrs" class="col-lg-12 control-label">Margin(In Rs)</label>
+                                    <input type="text" class="form-control" placeholder="0.00" id="marinrs" name="marinrs" value="">
+                                </div>
+                        </div>
+                        <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="schemediscount" class="col-lg-12 control-label">Discount (In %)</label>
+                                    <input type="text" class="form-control" placeholder="0.00 %" id="schemediscount" name="schemediscount" value="">
+                                </div>
+                            </div>
+                        <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="schemediscountrs" class="col-lg-12 control-label">Discount (In Rs)</label>
+                                    <input type="text" class="form-control" placeholder="0.00 Rs" id="schemediscountrs" name="schemediscountrs" value="">
+                                </div>
+                        </div>
+                    <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="lowinvnt" class="col-lg-12 control-label">Low Inventory Level</label>
+                                <input type="text" class="form-control" placeholder="0" id="lowinvnt" name="lowinvnt" value="">
+                            </div>
+                    </div>
+                    <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="mrp" class="col-lg-12 control-label">MRP(per Unit)</label>
+                                <input type="text" class="form-control" placeholder="0" id="mrp" name="mrp" value="">
+                            </div>
+                    </div>
+                    <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="disinper" class="col-lg-12 control-label">Discount on MRP(Per Unit in %)</label>
+                                <input type="text" class="form-control" placeholder="0 %" id="disinper" name="disinper" value="">
+                            </div>
+                    </div>
+                    <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="disinrs" class="col-lg-12 control-label">Discount on MRP(Per Unit in Rs)</label>
+                                <input type="text" class="form-control" placeholder="0" id="disinrs" name="disinrs" value="">
+                            </div>
+                    </div>
+                    <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="sp" class="col-lg-12 control-label">Selling Price(Per Unit)</label>
+                                <input type="text" class="form-control" placeholder="0" id="sp" name="sp" value="">
+                            </div>
+                    </div>
+                    <div class="col-lg-3">
+                            <div class="form-group">
+                                    <label for="margin" class="col-lg-12 control-label">Margin On</label>
+                                    <label class="radio-inline">
+                                            <input type="radio" name="margin" id="marmrp" value="">MRP
+                                     </label>
+                                  <label class="radio-inline">
+                                        <input type="radio" name="margin" id="salprice" value="">Sales Price
+                                  </label>
+                            </div>
+                    </div>
+                    <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="expdate" class="col-lg-12 control-label">Expiry Date</label>
+                                <input type="date" class="form-control" id="expdate" name="expdate" value="">
+                            </div>
+                    </div>
+                    <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="total" class="col-lg-12 control-label">Total(In Rs)</label>
+                                <input type="text" class="form-control" placeholder="0" id="total" name="total" value="">
+                            </div>
+                    </div>
+                </div> 
+                <center><button type="submit" class="btn" onclick="">Submit</button></center>
+            </form>
+        </div>
+       
+  </div>
+
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>

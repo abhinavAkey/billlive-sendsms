@@ -40,7 +40,13 @@
                         <div class="form-group">
 		                    <label for="quantityType" class="col-lg-12 control-label">Quantity Type</label>
 		                    <select class="form-control" id="quantityType" name="quantityType" value="">
-		                        <option value="">Choose Item Type</option>
+		                        <option value="KG">KG</option>
+		                        <option value="GRAMS">GRAMS</option>
+		                        <option value="QUINTAL">QUINTAL</option>
+		                        <option value="TONNES">TONNES</option>
+		                        <option value="LITERS">LITERS</option>
+		                        <option value="ML">ML</option>
+		                        option value="PIECES">PIECES</option>
 		                    </select>
                     	</div>
                 </div>

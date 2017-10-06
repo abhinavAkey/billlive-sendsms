@@ -38,6 +38,8 @@ public class ProductRepository {
 			product.setProductLocationId(productAlreadyInDB.getProductLocationId());
 			editProductAndLocation(product);
 		} else {
+
+			
 			String sql = "INSERT INTO product_location (product_id, location_id, price, company_id, uid) VALUES (?, ?, ?, ?, ?)";
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setInt(1, product.getProductId());
@@ -62,13 +64,35 @@ public class ProductRepository {
 			product.setProductId(productAlreadyInDB.getProductId());
 			editProduct(product);
 		} else {
+			//INSERT INTO product (product_id, product_name, product_category, company_id, uid, brand_name, hsn_code, cost_price_excluding_tax, quantity_type, quantity_received, quantity_available, taxable_amount, gst_tax, tax_amount, cost_price_inclusive_tax, margin_in_percentage, margin_in_rupees, discount_in_percentage, discount_in_rupees, low_invnt, mrp_per_unit, selling_price, exp_date, total_unit_price) VALUES (?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?);
+
 			//String sql = "INSERT INTO product (product_name, product_category , product_image) VALUES (?, ?, ?)";
-			String sql = "INSERT INTO product (product_name, product_category, company_id, uid) VALUES (?, ?, ?, ?)";
+			//String sql = "INSERT INTO product (product_name, product_category, company_id, uid) VALUES (?, ?, ?, ?)";
+			String sql = "INSERT INTO product (product_name, product_category, company_id, uid, brand_name, hsn_code, cost_price_excluding_tax, quantity_received, quantity_available, taxable_amount, gst_tax, tax_amount, cost_price_inclusive_tax, margin_in_percentage, margin_in_rupees, discount_in_percentage, discount_in_rupees, low_invnt, mrp_per_unit, selling_price, exp_date, total_unit_price, quantity_type) VALUES (?, ?, ?,  ?,?,?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?);";
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, product.getProductName());
 			statement.setString(2, product.getProductCategory());
 			statement.setString(3, product.getCompanyId());
 			statement.setString(4, product.getUid());
+			statement.setString(5, product.getBrandName());
+			statement.setString(6, product.getHsnCode());
+			statement.setDouble(7, product.getCostPriceExcludingTax());
+			statement.setDouble(8, product.getQuantityReceived());
+			statement.setDouble(9, product.getQuantityAvailable());
+			statement.setDouble(10, product.getTaxableAmount());
+			statement.setDouble(11, product.getGstTax());
+			statement.setDouble(12, product.getTaxAmount());
+			statement.setDouble(13, product.getCostPriceInclusiveTax());
+			statement.setDouble(14, product.getMarginInPercentage());
+			statement.setDouble(15, product.getMarginInRupees());
+			statement.setDouble(16, product.getDiscountInPercentage());
+			statement.setDouble(17, product.getDiscountInRupees());
+			statement.setDouble(18, product.getLowinvnt());
+			statement.setDouble(19, product.getMrpPerUnit());
+			statement.setDouble(20, product.getSellingPrice());
+			statement.setDate(21, product.getExpDate());
+			statement.setDouble(22, product.getTotalUnitPrice());
+			statement.setString(23, product.getQuantityType().toString());
 			/*Blob blob = new javax.sql.rowset.serial.SerialBlob(product.getProductImage());
 			statement.setBlob(3, null);*/
 			int rowsInserted = statement.executeUpdate();

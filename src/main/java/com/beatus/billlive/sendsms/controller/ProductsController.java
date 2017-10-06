@@ -5,13 +5,16 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.beatus.billlive.sendsms.model.Location;
 import com.beatus.billlive.sendsms.model.Product;
@@ -20,7 +23,6 @@ import com.beatus.billlive.sendsms.model.ProductsAndLocationsResponse;
 import com.beatus.billlive.sendsms.model.ProductsResponse;
 import com.beatus.billlive.sendsms.service.ProductService;
 import com.beatus.billlive.sendsms.utils.Constants;
-
 @Controller
 @RequestMapping(Constants.WEB_PRODUCTS_REQUEST)
 public class ProductsController {
@@ -74,7 +76,7 @@ public class ProductsController {
     	List<Location> locations = productService.getLocations(companyId);
     	model.addAttribute("locations", locations);
         return "product/request-product-location-add";
-    }
+    } 
     
     @RequestMapping(value = Constants.WEB_PRODUCTS_ADD_PRODUCT_AND_LOCATION,
             method = RequestMethod.POST)
@@ -123,7 +125,7 @@ public class ProductsController {
         resp.setProductsAndLocations(products);
     	model.addAttribute("productsResp", resp); 
     	model.addAttribute("products", products); 
-    	return "product/request-products-locations-get";
+    	return "bill/request-products-locations-get";
     }
     
     @RequestMapping(value = Constants.WEB_PRODUCTS_DELETE_PRODUCTS,
@@ -143,4 +145,16 @@ public class ProductsController {
     	String resp = productService.deleteProductAndLocations(product.getProductLocationId(), companyId, uid);
     	return resp;
     }
+    
+    @RequestMapping(value = Constants.WEB_PRODUCTS_GET_PRODUCT_BY_ID,
+            method = RequestMethod.GET)
+    public String getProductByProductId(HttpServletRequest request, ModelMap model, @RequestBody int productId) throws SQLException, ClassNotFoundException {
+    	String companyId = (String) request.getAttribute(Constants.COMPANY_ID);
+		String uid = (String) request.getAttribute(Constants.USERNAME);
+    	Product product = productService.getProductById(productId , companyId );
+    	String resp = null;
+    	return resp;
+    }
+    
+
 }
