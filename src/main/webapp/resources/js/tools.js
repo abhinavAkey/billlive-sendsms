@@ -401,26 +401,28 @@ function processSavePasswordResponse(data) {
 }
 
 function getProductById(id){
+console.log("id is " +id);
 	var http = location.protocol;
 	var slashes = http.concat("//");
 	var host = slashes.concat(window.location.host);
-	var webapi = host + "/billlive-sendsms/product/getproductById";
-
+	var webapi = host + "/billlive-sendsms/product/getProductById";
+	var get = "get"
 	var serviceObject = {
 		url : webapi,
+		type : get,
 		data : {
-			productLocationId : name,
-			productId : productId,
-			locationId : locationId,
-			productPrice :productPrice
+			productId : id,
 		}
 	};
+	console.log("serviceObject is " +serviceObject);
 	this.serviceCalls(serviceObject, this.processSavePasswordResponse);
 
 }
 
 
 function serviceCalls(serviceObject, success, fail) {
+	console.log("In service call is " );
+
 	$.ajax({
 		url : serviceObject.url,
 		data : serviceObject.data,
@@ -436,6 +438,8 @@ function serviceCalls(serviceObject, success, fail) {
 			}
 		},
 		success : function(response) {
+			
+			alert(JSON.stringify(response));
 			alert('Success')
 		},
 		error : function(e) {
