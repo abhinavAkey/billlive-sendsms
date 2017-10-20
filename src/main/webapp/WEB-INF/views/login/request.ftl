@@ -2,8 +2,8 @@
         "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <link rel="stylesheet" href="/billlive-sendsms/resources/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/billlive-sendsms/resources/css/style.css">
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/css/style.css">
 </head>
 <#include "header.ftl">
 <body>
@@ -16,8 +16,8 @@
 </div>
 </body>
 
-<script src="/billlive-sendsms/resources/js/jquery.js" type="text/javascript"></script>
-<script src="/billlive-sendsms/resources/js/state.js" type="text/javascript"></script>
-<script src="/billlive-sendsms/resources/js/tools.js" type="text/javascript"></script>
+<script src="/resources/js/jquery.js" type="text/javascript"></script>
+<script src="/resources/js/state.js" type="text/javascript"></script>
+<script src="/resources/js/tools.js" type="text/javascript"></script>
 
 </html>

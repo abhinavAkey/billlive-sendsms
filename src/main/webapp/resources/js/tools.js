@@ -90,7 +90,7 @@ function editDistributor(id) {
 	var http = location.protocol;
 	var slashes = http.concat("//");
 	var host = slashes.concat(window.location.host);
-	var webapi = host + "/billlive-sendsms/distributor/editDistributor";
+	var webapi = host + "/distributor/editDistributor";
 
 	var serviceObject = {
 		url : webapi,
@@ -113,7 +113,7 @@ function deleteDistributor(id) {
 	var http = location.protocol;
 	var slashes = http.concat("//");
 	var host = slashes.concat(window.location.host);
-	var webapi = host + "/billlive-sendsms/distributor/deleteDistributor";
+	var webapi = host + "/distributor/deleteDistributor";
 
 	var serviceObject = {
 		url : webapi,
@@ -146,7 +146,7 @@ function editProduct(id) {
 	var http = location.protocol;
 	var slashes = http.concat("//");
 	var host = slashes.concat(window.location.host);
-	var webapi = host + "/billlive-sendsms/product/editProduct";
+	var webapi = host + "/product/editProduct";
 
 	var serviceObject = {
 		url : webapi,
@@ -168,7 +168,7 @@ function deleteProduct(id) {
 	var http = location.protocol;
 	var slashes = http.concat("//");
 	var host = slashes.concat(window.location.host);
-	var webapi = host + "/billlive-sendsms/product/deleteProduct";
+	var webapi = host + "/product/deleteProduct";
 
 	var serviceObject = {
 		url : webapi,
@@ -207,7 +207,7 @@ function editLocation(id) {
 	var http = location.protocol;
 	var slashes = http.concat("//");
 	var host = slashes.concat(window.location.host);
-	var webapi = host + "/billlive-sendsms/location/editLocation";
+	var webapi = host + "/location/editLocation";
 
 	var serviceObject = {
 		url : webapi,
@@ -231,7 +231,7 @@ function deleteLocation(id) {
 	var http = location.protocol;
 	var slashes = http.concat("//");
 	var host = slashes.concat(window.location.host);
-	var webapi = host + "/billlive-sendsms/location/deleteLocation";
+	var webapi = host + "/location/deleteLocation";
 
 	var serviceObject = {
 		url : webapi,
@@ -267,7 +267,7 @@ function editProductsAndLocations(id) {
 	var http = location.protocol;
 	var slashes = http.concat("//");
 	var host = slashes.concat(window.location.host);
-	var webapi = host + "/billlive-sendsms/product/editProductsAndLocations";
+	var webapi = host + "/product/editProductsAndLocations";
 
 	var serviceObject = {
 		url : webapi,
@@ -290,7 +290,7 @@ function deleteProductsAndLocations(id) {
 	var http = location.protocol;
 	var slashes = http.concat("//");
 	var host = slashes.concat(window.location.host);
-	var webapi = host + "/billlive-sendsms/product/deleteProductsAndLocations";
+	var webapi = host + "/product/deleteProductsAndLocations";
 
 	var serviceObject = {
 		url : webapi,
@@ -335,7 +335,7 @@ function editConfiguration(id) {
 	var http = location.protocol;
 	var slashes = http.concat("//");
 	var host = slashes.concat(window.location.host);
-	var webapi = host + "/billlive-sendsms/sms/editSmsConfiguration";
+	var webapi = host + "/sms/editSmsConfiguration";
 
 	var serviceObject = {
 		url : webapi,
@@ -384,7 +384,7 @@ function sendsms() {
 	var http = location.protocol;
 	var slashes = http.concat("//");
 	var host = slashes.concat(window.location.host);
-	var webapi = host + "/billlive-sendsms/sms/sendsmsScreen";
+	var webapi = host + "/sms/sendsmsScreen";
 
 	var serviceObject = {
 		url : webapi,
@@ -405,7 +405,7 @@ console.log("id is " +id);
 	var http = location.protocol;
 	var slashes = http.concat("//");
 	var host = slashes.concat(window.location.host);
-	var webapi = host + "/billlive-sendsms/product/getProductById";
+	var webapi = host + "/product/getProductById";
 	var get = "get"
 	var serviceObject = {
 		url : webapi,

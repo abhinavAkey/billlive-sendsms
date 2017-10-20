@@ -1,30 +1,5 @@
-/****************************************************************************
- * AOL LLC CONFIDENTIAL INFORMATION
- *
- * Copyright (c) 1998-2007 AOL LLC.  All Rights Reserved.
- * Unauthorized reproduction, transmission, or distribution of
- * this software is a violation of applicable laws.
- *
- ****************************************************************************
- * 
- * @author:     Zhang
- * @version:    $Revision: 567 $
- * @created:    September 10, 2006
- *
- * Description: Exception for all encryption errors.
- * 
- ****************************************************************************/
-
 package com.beatus.billlive.sendsms.exception;
 
-
-/**
- * This is the exception for all crypto related errors (Provider not found,
- * invalid key, decryption/encryption errros).
- *
- * @version $Revision: 567 $
- * @author Zhang
- */
 
 public class CryptoException extends Exception {
 

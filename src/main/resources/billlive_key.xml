@@ -3,7 +3,7 @@
     This file contains the material used to generate all symmetric keys 
     used by the billlive.
 -->
-<key-chain xmlns="http://idp.aol.com/NS/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://idp.aol.com/NS/1.0 http://auth.office.aol.com/schemas/idp_key.xsd" version="1.0">
+<key-chain xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0">
     <key-name name="bl_sc_e">
         <description>
             Message encryption key

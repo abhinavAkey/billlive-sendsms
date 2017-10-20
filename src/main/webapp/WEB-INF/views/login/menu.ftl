@@ -3,13 +3,13 @@
     <span></span></a>
 <div id="menu">
     <div class="pure-menu">
-        <a class="pure-menu-heading" href="/billlive-sendsms/user/login">LOGIN</a>
+        <a class="pure-menu-heading" href="/user/login">LOGIN</a>
         <ul class="pure-menu-list">
             <li class="pure-menu-item">
-                <a href="/billlive-sendsms/user/login" class="pure-menu-link">Login</a>
+                <a href="/user/login" class="pure-menu-link">Login</a>
             </li>
             <li class="pure-menu-item">
-                <a href="/billlive-sendsms/user/signup" class="pure-menu-link">Sign up</a>
+                <a href="/user/signup" class="pure-menu-link">Sign up</a>
             </li>
             
             <!--  <li class="pure-menu-item">

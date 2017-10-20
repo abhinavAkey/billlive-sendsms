@@ -4,7 +4,13 @@ import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
-import org.glassfish.jersey.servlet.ServletContainer;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.jmx.JmxAutoConfiguration;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.WebApplicationInitializer;
@@ -23,7 +29,8 @@ import org.springframework.web.servlet.DispatcherServlet;
  * @since 1.0
  */
 @Order(Ordered.HIGHEST_PRECEDENCE)
-public class ApplicationInitializer implements WebApplicationInitializer {
+@SpringBootApplication(exclude = {JmxAutoConfiguration.class, DataSourceAutoConfiguration.class})
+public class ApplicationInitializer extends SpringBootServletInitializer implements WebApplicationInitializer {
 
     @Override
     public void onStartup(ServletContext context) throws ServletException {
@@ -72,5 +79,17 @@ public class ApplicationInitializer implements WebApplicationInitializer {
         characterEncodingFilter.setInitParameter(
                 "forceEncoding", 
                 "true"); 
+    }
+    
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        // Customize the application or call application.sources(...) to add sources
+        // Since our example is itself a @Configuration class (via @SpringBootApplication)
+        // we actually don't need to override this method.
+        return application;
+    }
+    
+    public static void main(String[] args) {
+        SpringApplication.run(ApplicationInitializer.class, args);
     }
 }

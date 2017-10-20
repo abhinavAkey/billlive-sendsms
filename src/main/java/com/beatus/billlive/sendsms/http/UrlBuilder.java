@@ -1,19 +1,3 @@
-/****************************************************************************
- * AOL LLC CONFIDENTIAL INFORMATION
- *
- * Copyright (c) 1998-2011 AOL LLC.  All Rights Reserved.
- * Unauthorized reproduction, transmission, or distribution of
- * this software is a violation of applicable laws.
- *
- ****************************************************************************
- *
- * @author:     zhang
- * @version:    $Revision: 1954 $
- * @created:    Aug 5, 2009
- *
- * Description: A utility class to build URLs with query parameters
- *
- ****************************************************************************/
 package com.beatus.billlive.sendsms.http;
 
 
@@ -23,20 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * A class to build URLs with parameters.
- * <p>
- * Example,
- * <pre>
- * UrlBuilder builder = new UrlBuilder("http://aol.com");
- * builder.add("dest", "http://login.aol.com");
- * builder.add("count", 5);
- * String url = builder.getUrl();
- * </pre>
- *
- * @author zhang
- *
- */
 public class UrlBuilder {
 
 	protected String baseUrl;
@@ -56,20 +26,6 @@ public class UrlBuilder {
 		this.baseUrl = baseUrl;
 	}
 
-    /**
-     * Create an UrlBuilder with base URL, which is made of
-     * base and suffix. They may contain overlapping path, which
-     * is not duplicated.
-     * <p />
-     * For example,
-     * <pre>
-     *      UrlBuilder url = new UrlBuider("http://aol.com/login", "/login?site=aol.com");
-     * </pre>
-     * The "/login" part is not repeated in above example.
-     *
-     * @param base Base URL
-     * @param suffix Any path, query string appended to URL
-     */
     public UrlBuilder(String base, String suffix) {
         this(concatWithOverlap(base, suffix));
     }

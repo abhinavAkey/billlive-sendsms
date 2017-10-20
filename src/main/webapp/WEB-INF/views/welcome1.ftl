@@ -1,7 +1,7 @@
 <html>
 <head>
-    <link rel="stylesheet" href="/billlive-sendsms/resources/css/unpkg-pure-min.css">
-    <link rel="stylesheet" href="/billlive-sendsms/resources/css/side-menu.css"></head>
+    <link rel="stylesheet" href="/resources/css/unpkg-pure-min.css">
+    <link rel="stylesheet" href="/resources/css/side-menu.css"></head>
 <body>
 
 <div id="layout">
@@ -15,6 +15,6 @@
     </div>
 
 </div>
-<script type="text/javascript" src="/billlive-sendsms/resources/js/tools.js"></script>
+<script type="text/javascript" src="/resources/js/tools.js"></script>
 </body>
 </html>

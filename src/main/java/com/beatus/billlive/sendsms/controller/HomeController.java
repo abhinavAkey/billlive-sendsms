@@ -7,15 +7,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/**
- * Created by cpfort on 9/15/16.
- */
-
 @Controller
 @RequestMapping("/")
-public class ToolsController {
+public class HomeController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ToolsController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(HomeController.class);
 
     @RequestMapping(method = RequestMethod.GET)
     public String sayHello(ModelMap model) {

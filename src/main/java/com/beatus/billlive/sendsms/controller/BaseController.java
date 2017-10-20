@@ -8,9 +8,6 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
 
-/**
- * Created by cpfort on 3/5/17.
- */
 public abstract class BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BaseController.class);

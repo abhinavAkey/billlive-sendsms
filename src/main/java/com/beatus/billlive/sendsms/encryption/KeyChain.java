@@ -1,19 +1,3 @@
-/****************************************************************************
- * AOL LLC CONFIDENTIAL INFORMATION
- *
- * Copyright (c) 1998-2009 AOL LLC.  All Rights Reserved.
- * Unauthorized reproduction, transmission, or distribution of
- * this software is a violation of applicable laws.
- *
- ****************************************************************************
- * 
- * @author:     zhang
- * @version:    $Revision: 1603 $
- * @created:    Aug 1, 2009
- *
- * Description: Key-chain to store symmetric encryption keys
- * 
- ****************************************************************************/
 package com.beatus.billlive.sendsms.encryption;
 
 import java.io.FileInputStream;

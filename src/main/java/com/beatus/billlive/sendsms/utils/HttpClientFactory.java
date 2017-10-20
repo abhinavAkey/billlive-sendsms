@@ -7,10 +7,6 @@ package com.beatus.billlive.sendsms.utils;
 
 import javax.ws.rs.client.Client;
 
-/**
- *
- * @author michaelajr
- */
 public interface HttpClientFactory {
 
     public Client createClient();

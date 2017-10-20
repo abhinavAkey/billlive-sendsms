@@ -44,7 +44,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 		Map<String, String> cookieContent = cookieManager.getExistingCookie(request, response, COOKIE_NAME);
 		boolean isPageValid = cookieContent != null ? true : false;
 		if (StringUtils.isNotBlank(servletPath) && !servletPath.contains(Constants.WEB_LOGIN) && !servletPath.contains(Constants.WEB_USER_SIGNUP) && !isPageValid) {
-			response.sendRedirect("/billlive-sendsms/user/login");
+			response.sendRedirect("/user/login");
 			return continueExecution;
 		} else {
 			if (cookieContent != null) {

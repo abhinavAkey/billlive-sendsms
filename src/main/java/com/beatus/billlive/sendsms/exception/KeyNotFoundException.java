@@ -1,20 +1,3 @@
-/****************************************************************************
- * AOL LLC CONFIDENTIAL INFORMATION
- *
- * Copyright (c) 1998-2007 AOL LLC.  All Rights Reserved.
- * Unauthorized reproduction, transmission, or distribution of
- * this software is a violation of applicable laws.
- *
- ****************************************************************************
- * 
- * @author:     Zhang
- * @version:    $Revision: 567 $
- * @created:    September 10, 2006
- *
- * Description: Exception for missing keys
- * 
- ****************************************************************************/
-
 package com.beatus.billlive.sendsms.exception;
 
 /**

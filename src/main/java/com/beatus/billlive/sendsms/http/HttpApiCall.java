@@ -1,11 +1,3 @@
-/*
- * AOL INC CONFIDENTIAL INFORMATION
- *
- * Copyright (c) 1998-2011 AOL INC.  All Rights Reserved.
- * Unauthorized reproduction, transmission, or distribution of
- * this software is a violation of applicable laws.
- */
-
 package com.beatus.billlive.sendsms.http;
 
 import java.io.FileInputStream;

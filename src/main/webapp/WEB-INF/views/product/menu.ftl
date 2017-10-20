@@ -4,44 +4,44 @@
     <span></span></a>
 <div id="menu">
     <div class="pure-menu">
-        <a class="pure-menu-heading" href="/billlive-sendsms/">Billlive Send SMS</a>
+        <a class="pure-menu-heading" href="/">Billlive Send SMS</a>
         <ul class="pure-menu-list">
             <li class="pure-menu-item">
-                <a href="/billlive-sendsms/location/addLocation" class="pure-menu-link">Add Locations</a>
+                <a href="/location/addLocation" class="pure-menu-link">Add Locations</a>
             </li>
             <li class="pure-menu-item">
-                <a href="/billlive-sendsms/location/getLocations" class="pure-menu-link">Edit/Get Locations</a>
+                <a href="/location/getLocations" class="pure-menu-link">Edit/Get Locations</a>
             </li>
             <li class="pure-menu-item">
-                <a href="/billlive-sendsms/product/addProduct" class="pure-menu-link">Add Product</a>
+                <a href="/product/addProduct" class="pure-menu-link">Add Product</a>
             </li>
             <li class="pure-menu-item">
-                <a href="/billlive-sendsms/product/getProducts" class="pure-menu-link">Edit/Get Products</a>
+                <a href="/product/getProducts" class="pure-menu-link">Edit/Get Products</a>
             </li>
             <li class="pure-menu-item">
-                <a href="/billlive-sendsms/product/addProductAndLocation" class="pure-menu-link">Add Products With Locations</a>
+                <a href="/product/addProductAndLocation" class="pure-menu-link">Add Products With Locations</a>
             </li>
             <li class="pure-menu-item">
-                <a href="/billlive-sendsms/product/getProductsAndLocations" class="pure-menu-link">Edit/Get Products with Locations</a>
+                <a href="/product/getProductsAndLocations" class="pure-menu-link">Edit/Get Products with Locations</a>
             </li>
             <li class="pure-menu-item">
-                <a href="/billlive-sendsms/distributor/addDistributor" class="pure-menu-link">Add Distributors</a>
+                <a href="/distributor/addDistributor" class="pure-menu-link">Add Distributors</a>
             </li>
             <li class="pure-menu-item">
-                <a href="/billlive-sendsms/distributor/getDistributors" class="pure-menu-link">Edit/Get Distributors</a>
+                <a href="/distributor/getDistributors" class="pure-menu-link">Edit/Get Distributors</a>
             </li>
             <li class="pure-menu-item">
-                <a href="/billlive-sendsms/sms/addSmsConfiguration" class="pure-menu-link">Add SMS Configuration</a>
+                <a href="/sms/addSmsConfiguration" class="pure-menu-link">Add SMS Configuration</a>
             </li>
             <li class="pure-menu-item">
-                <a href="/billlive-sendsms/sms/getSmsConfiguration" class="pure-menu-link">Edit/Get SMS Configuration</a>
+                <a href="/sms/getSmsConfiguration" class="pure-menu-link">Edit/Get SMS Configuration</a>
             </li>
             <li class="pure-menu-item">
-                <a href="/billlive-sendsms/sms/sendsmsScreen" class="pure-menu-link">Send SMS</a>
+                <a href="/sms/sendsmsScreen" class="pure-menu-link">Send SMS</a>
             </li>
             
             <li class="pure-menu-item menu-item-divided" style="margin-top: 30px;">
-        		<a class="pure-menu-link" href="/billlive-sendsms/user/logout">Logout</a>
+        		<a class="pure-menu-link" href="/user/logout">Logout</a>
             </li>
             
             <!--  <li class="pure-menu-item">
